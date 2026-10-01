@@ -1271,7 +1271,7 @@ dtype: object
 <span class="k">print</span>((d[<span class="o">1</span>] - d[<span class="o">0</span>]).days)</code></pre>
 <div class="lbl mt">Output</div><div class="out">730</div>
 </article></section>
-<section class="sec" id="statistics"><p class="blurb">Describing data, and using a sample to make claims about everyone.</p><nav class="jump"><a href="#what-statistics-is-for">What statistics is for</a><a href="#what-kind-of-column-is-it">What kind of column is it</a><a href="#where-the-middle-is">Where the middle is</a><a href="#how-spread-out-it-is">How spread out it is</a><a href="#finding-outliers">Finding outliers</a><a href="#two-columns-together">Two columns together</a><a href="#samples-and-populations">Samples and populations</a><a href="#the-central-limit-theorem">The Central Limit Theorem</a><a href="#confidence-intervals">Confidence intervals</a><a href="#hypothesis-testing">Hypothesis testing</a><a href="#which-test-to-use">Which test to use</a></nav><h2 class="cat" id="what-statistics-is-for">What statistics is for</h2>
+<section class="sec" id="statistics"><p class="blurb">Describing data, and using a sample to make claims about everyone.</p><nav class="jump"><a href="#what-statistics-is-for">What statistics is for</a><a href="#what-kind-of-column-is-it">What kind of column is it</a><a href="#where-the-middle-is">Where the middle is</a><a href="#how-spread-out-it-is">How spread out it is</a><a href="#finding-outliers">Finding outliers</a><a href="#two-columns-together">Two columns together</a><a href="#samples-and-populations">Samples and populations</a><a href="#the-central-limit-theorem">The Central Limit Theorem</a><a href="#confidence-intervals">Confidence intervals</a><a href="#hypothesis-testing">Hypothesis testing</a><a href="#which-test-to-use">Which test to use</a></nav><h2 class="cat" id="what-statistics-is-for">What statistics is for<span class="day">Day 1</span></h2>
 <article class="e"><h3>Descriptive vs inferential</h3>
 <div class="why"><span class="lbl">Why it exists</span><p>The split that organises the whole subject. Every technique you learn sits on one side or the other, and which side you are on decides how confident you are allowed to sound.</p></div>
 <div class="what"><span class="lbl">In short</span><p>DESCRIPTIVE: you measured everybody, so you are only summarising and cannot be wrong. INFERENTIAL: you measured a few and want to talk about everybody, so there is always a risk attached.</p></div>
@@ -1292,7 +1292,7 @@ INFERENTIAL - a claim about everyone, built from a few
    30 people say: 70032
    and we use that to talk about people we never measured</div>
 </article>
-<h2 class="cat" id="what-kind-of-column-is-it">What kind of column is it</h2>
+<h2 class="cat" id="what-kind-of-column-is-it">What kind of column is it<span class="day">Day 2</span></h2>
 <article class="e"><h3>The four scales</h3>
 <div class="why"><span class="lbl">Why it exists</span><p>The scale of a column decides which calculations are legal on it. This is the most common beginner mistake and the computer will not stop you making it.</p></div>
 <div class="what"><span class="lbl">In short</span><p>NOMINAL: names, no order. ORDINAL: there is an order but the gaps are not equal. INTERVAL: equal gaps but no true zero. RATIO: equal gaps and a real zero, so ratios make sense.</p></div>
@@ -1882,7 +1882,7 @@ it does NOT mean:
 so p = 0.049 and p = 0.051 mean the same thing. do not pretend otherwise.</div>
 </article>
 <article class="e"><h3>Fail to reject is not proved</h3>
-<div class="why"><span class="lbl">Why it exists</span><p>Never say 'accept the null'. Once a student writes it they keep writing it.</p></div>
+<div class="why"><span class="lbl">Why it exists</span><p>Never write 'accept the null'. It is the single most common way to lose marks on an otherwise correct answer, and it misstates what the test did.</p></div>
 <div class="what"><span class="lbl">In short</span><p>A high p-value means the evidence was not strong enough - not that there is nothing there. A tiny sample fails to reject almost anything. 'Not guilty' is a verdict about the evidence, not a certificate of innocence.</p></div>
 <div class="lbl mt">Code</div><pre><code>sample = pop.sample(<span class="o">100</span>, replace=<span class="k">True</span>, random_state=<span class="o">54</span>)
 t, p = stats.ttest_1samp(sample, <span class="o">72000</span>)
@@ -1952,7 +1952,7 @@ Sales 66535 vs Marketing 73954  p = 0.0086
    -&gt; also real, but you could not have guessed by eye</div>
 </article>
 <article class="e"><h3>Chi-square, and a result that finds nothing</h3>
-<div class="why"><span class="lbl">Why it exists</span><p>Most courses only show tests that succeed, which teaches students that a test confirms what they hoped. Usually it does not.</p></div>
+<div class="why"><span class="lbl">Why it exists</span><p>Almost every example you meet is a test that finds something, which makes it easy to assume a test confirms what you hoped. Usually it does not, and reporting that clearly is part of the job.</p></div>
 <div class="what"><span class="lbl">In short</span><p>Compares a table of counts against what you would expect if the two categories were unrelated. A high p-value means no evidence of a link - NOT proof there is none.</p></div>
 <div class="lbl mt">Code</div><pre><code>table = pd.crosstab(clean['department'], clean['rating'])
 chi2, p, dof, exp = stats.chi2_contingency(table)
@@ -2014,7 +2014,7 @@ decide what you are testing BEFORE you look.</div>
 </article></section>
 <section class="sec" id="probability"><p class="blurb">How likely something is, and the bell curve everything else is built on.</p><nav class="jump"><a href="#probability-basics">Probability basics</a><a href="#the-normal-distribution">The normal distribution</a></nav><h2 class="cat" id="probability-basics">Probability basics<span class="day">Day 8</span></h2>
 <article class="e"><h3>The two ways to get a probability</h3>
-<div class="why"><span class="lbl">Why it exists</span><p>Knowing which one you are in. Students think probability means dice; at work it is almost always counting.</p></div>
+<div class="why"><span class="lbl">Why it exists</span><p>Knowing which one you are in. It is easy to assume probability means dice and coins; at work it is almost always counting rows.</p></div>
 <div class="what"><span class="lbl">In short</span><p>THEORETICAL: reason from the structure of the thing - a coin has 2 sides, so heads is 1/2. EMPIRICAL: count what actually happened - 49 of 201 work in Tech, so 0.244.</p></div>
 <div class="lbl mt">Code</div><pre><code><span class="k">print</span>("theoretical: a coin has <span class="o">2</span> sides      -&gt; P(heads) = <span class="o">0.5</span>")
 <span class="k">print</span>("empirical  : count the actual rows   -&gt; P(Tech)  =",
