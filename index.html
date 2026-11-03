@@ -80,7 +80,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--sienna);outline-off
  <h1>Student Reference</h1>
  <p class="sub">Everything from the course in one place. Every example was run for real, so the
  output you see is the output you will get.</p>
- <div class="tabs"><button class="tab" data-go="numpy">NumPy <span>50</span></button><button class="tab" data-go="pandas">Pandas <span>77</span></button><button class="tab" data-go="statistics">Statistics <span>49</span></button><button class="tab" data-go="probability">Probability <span>12</span></button></div>
+ <div class="tabs"><button class="tab" data-go="numpy">NumPy <span>50</span></button><button class="tab" data-go="pandas">Pandas <span>77</span></button><button class="tab" data-go="statistics">Statistics <span>49</span></button><button class="tab" data-go="probability">Probability <span>12</span></button><button class="tab" data-go="viz">Charts <span>25</span></button><button class="tab" data-go="excel">Excel <span>46</span></button></div>
 </header>
 <section class="sec" id="numpy"><p class="blurb">Arrays — the fast, fixed-type container that pandas is built on.</p><nav class="jump"><a href="#creating-arrays">Creating arrays</a><a href="#checking-an-array">Checking an array</a><a href="#getting-values-out">Getting values out</a><a href="#changing-the-shape">Changing the shape</a><a href="#joining-arrays">Joining arrays</a><a href="#maths-on-arrays">Maths on arrays</a><a href="#summarising">Summarising</a><a href="#searching-and-sorting">Searching and sorting</a></nav><h2 class="cat" id="creating-arrays">Creating arrays</h2>
 <article class="e"><h3>np.array()</h3>
@@ -2206,7 +2206,652 @@ normalised 0-1  : [0.53 0.53 0.46]
 
 note: round(series) works. round(array) does NOT - use .round(2) instead.</div>
 </article></section>
-<footer>TAP Academy &mdash; Data Analytics &middot; 188 entries, all executed</footer>
+<section class="sec" id="viz"><p class="blurb">Drawing the data - matplotlib and seaborn, and which chart answers which question.</p><nav class="jump"><a href="#getting-started">Getting started</a><a href="#bar-chart">Bar chart</a><a href="#histogram">Histogram</a><a href="#box-plot">Box plot</a><a href="#scatter-plot">Scatter plot</a><a href="#pie-chart">Pie chart</a><a href="#line-plot">Line plot</a><a href="#seaborn">Seaborn</a></nav><h2 class="cat" id="getting-started">Getting started</h2>
+<article class="e"><h3>The three lines every chart needs</h3>
+<div class="what"><span class="lbl">In short</span><p>Import pyplot, call a chart function, then show it. Every chart in the course is this shape.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+
+df = pd.read_csv("employees.csv")
+
+plt.bar(["HR", "Tech", "Sales"], [<span class="o">45</span>, <span class="o">49</span>, <span class="o">64</span>])
+plt.show()</code></pre>
+</article>
+<article class="e"><h3>plt.show()</h3>
+<div class="what"><span class="lbl">In short</span><p>Draws the figure and clears it. Without it nothing appears, and the next chart would be drawn on top of this one.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+
+df = pd.read_csv("employees.csv")
+
+plt.bar(["HR", "Tech"], [<span class="o">45</span>, <span class="o">49</span>])
+plt.show()        <span class="c"># figure drawn <span class="k">and</span> cleared</span>
+
+plt.bar(["Sales", "Marketing"], [<span class="o">64</span>, <span class="o">42</span>])
+plt.show()        <span class="c"># a second, separate figure</span></code></pre>
+</article>
+<article class="e"><h3>Title and axis labels</h3>
+<div class="what"><span class="lbl">In short</span><p>A chart without labels cannot be read by anyone who did not make it. Add all three, every time.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+
+df = pd.read_csv("employees.csv")
+
+c = df["department"].value_counts()
+
+plt.bar(c.index, c.values)
+plt.title("Employees by department")
+plt.xlabel("Department")
+plt.ylabel("Number of employees")
+plt.show()</code></pre>
+</article>
+<article class="e"><h3>color</h3>
+<div class="what"><span class="lbl">In short</span><p>Any chart function takes a colour by name or hex code.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+
+df = pd.read_csv("employees.csv")
+
+c = df["department"].value_counts()
+plt.bar(c.index, c.values, color="teal")
+plt.show()</code></pre>
+</article>
+<h2 class="cat" id="bar-chart">Bar chart</h2>
+<article class="e"><h3>plt.bar()</h3>
+<div class="what"><span class="lbl">In short</span><p>Compares a value across categories. The categories go first, the heights second.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+
+df = pd.read_csv("employees.csv")
+
+plt.bar(["HR", "Tech", "Sales", "Marketing"], [<span class="o">45</span>, <span class="o">49</span>, <span class="o">64</span>, <span class="o">42</span>])
+plt.title("Employees by department")
+plt.show()</code></pre>
+</article>
+<article class="e"><h3>Straight from value_counts()</h3>
+<div class="what"><span class="lbl">In short</span><p>value_counts gives the categories as the index and the heights as the values, which is exactly what bar wants.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+
+df = pd.read_csv("employees.csv")
+
+c = df["department"].value_counts()
+<span class="k">print</span>(c)
+
+plt.bar(c.index, c.values)
+plt.show()</code></pre>
+<div class="lbl mt">Output</div><div class="out">department
+Sales        65
+Tech         49
+HR           45
+Marketing    42
+Name: count, dtype: int64
+&lt;s&gt;:10: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown</div>
+</article>
+<article class="e"><h3>plt.barh()  —  horizontal</h3>
+<div class="what"><span class="lbl">In short</span><p>The same chart on its side. Easier to read when the category names are long.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+
+df = pd.read_csv("employees.csv")
+
+c = df["city"].value_counts()
+plt.barh(c.index, c.values)
+plt.xlabel("Number of employees")
+plt.show()</code></pre>
+</article>
+<h2 class="cat" id="histogram">Histogram</h2>
+<article class="e"><h3>plt.hist()</h3>
+<div class="what"><span class="lbl">In short</span><p>Shows the shape of one numeric column by grouping values into ranges. It takes the raw column, not counts.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+
+df = pd.read_csv("employees.csv")
+
+plt.hist(df["age"].dropna())
+plt.title("Age distribution")
+plt.xlabel("Age")
+plt.ylabel("Number of employees")
+plt.show()</code></pre>
+</article>
+<article class="e"><h3>bins</h3>
+<div class="what"><span class="lbl">In short</span><p>How many ranges to split the data into. Too few hides the shape; too many turns it into noise.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+
+df = pd.read_csv("employees.csv")
+
+plt.hist(df["age"].dropna(), bins=<span class="o">5</span>)
+plt.show()
+
+plt.hist(df["age"].dropna(), bins=<span class="o">30</span>)
+plt.show()</code></pre>
+</article>
+<article class="e"><h3>A histogram is not a bar chart</h3>
+<div class="what"><span class="lbl">In short</span><p>A bar chart compares categories and the bars have gaps. A histogram shows one numeric column split into ranges and the bars touch.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+
+df = pd.read_csv("employees.csv")
+
+<span class="c"># bar: one bar per CATEGORY</span>
+c = df["department"].value_counts()
+plt.bar(c.index, c.values)
+plt.show()
+
+<span class="c"># hist: one bar per RANGE of a number</span>
+plt.hist(df["experience"], bins=<span class="o">8</span>)
+plt.show()</code></pre>
+</article>
+<h2 class="cat" id="box-plot">Box plot</h2>
+<article class="e"><h3>plt.boxplot()</h3>
+<div class="what"><span class="lbl">In short</span><p>Shows the median, the middle half of the data and the outliers in one picture.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+
+df = pd.read_csv("employees.csv")
+
+plt.boxplot(df["experience"])
+plt.ylabel("Years of experience")
+plt.show()</code></pre>
+</article>
+<article class="e"><h3>Reading one</h3>
+<div class="what"><span class="lbl">In short</span><p>The line in the box is the median, the box is the middle 50 percent, the whiskers reach the rest, and separate points are outliers.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+
+df = pd.read_csv("employees.csv")
+
+s = df["salary"].dropna()
+<span class="k">print</span>("min    ", s.min())
+<span class="k">print</span>("<span class="o">25</span>%    ", s.quantile(.25))
+<span class="k">print</span>("median ", s.median())
+<span class="k">print</span>("<span class="o">75</span>%    ", s.quantile(.75))
+<span class="k">print</span>("max    ", s.max())
+
+plt.boxplot(s)
+plt.show()</code></pre>
+<div class="lbl mt">Output</div><div class="out">min     33085.0
+25%     59003.5
+median  68647.0
+75%     80599.5
+max     5200000.0
+&lt;s&gt;:14: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown</div>
+</article>
+<h2 class="cat" id="scatter-plot">Scatter plot</h2>
+<article class="e"><h3>plt.scatter()</h3>
+<div class="what"><span class="lbl">In short</span><p>Plots two numeric columns against each other, one dot per row. Used to look for a relationship.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+
+df = pd.read_csv("employees.csv")
+
+plt.scatter(df["experience"], df["salary"])
+plt.xlabel("Experience (years)")
+plt.ylabel("Salary")
+plt.show()</code></pre>
+</article>
+<article class="e"><h3>alpha  —  when dots overlap</h3>
+<div class="what"><span class="lbl">In short</span><p>Making the dots semi-transparent shows where many of them sit on top of each other.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+
+df = pd.read_csv("employees.csv")
+
+plt.scatter(df["experience"], df["salary"], alpha=<span class="o">0.4</span>)
+plt.show()</code></pre>
+</article>
+<h2 class="cat" id="pie-chart">Pie chart</h2>
+<article class="e"><h3>plt.pie()</h3>
+<div class="what"><span class="lbl">In short</span><p>Shows parts of a whole. Only works when the slices add up to something meaningful.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+
+df = pd.read_csv("employees.csv")
+
+c = df["education"].value_counts()
+plt.pie(c.values, labels=c.index)
+plt.show()</code></pre>
+</article>
+<article class="e"><h3>autopct  —  show the percentages</h3>
+<div class="what"><span class="lbl">In short</span><p>Without the numbers a reader has to judge angles by eye, which people are bad at.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+
+df = pd.read_csv("employees.csv")
+
+c = df["education"].value_counts()
+plt.pie(c.values, labels=c.index, autopct="%<span class="o">1</span>.1f%%")
+plt.title("Education split")
+plt.show()</code></pre>
+</article>
+<article class="e"><h3>When not to use one</h3>
+<div class="what"><span class="lbl">In short</span><p>Angles are hard to compare. With more than about four slices, or slices of similar size, a bar chart is read faster.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+
+df = pd.read_csv("employees.csv")
+
+c = df["city"].value_counts()
+<span class="k">print</span>(c)
+
+plt.bar(c.index, c.values)      <span class="c"># easier to compare than a pie</span>
+plt.show()</code></pre>
+<div class="lbl mt">Output</div><div class="out">city
+Chennai      61
+Bangalore    54
+Hyderabad    48
+Pune         38
+Name: count, dtype: int64
+&lt;s&gt;:10: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown</div>
+</article>
+<h2 class="cat" id="line-plot">Line plot</h2>
+<article class="e"><h3>plt.plot()</h3>
+<div class="what"><span class="lbl">In short</span><p>Joins the points in order. Use it when the x axis is something that moves forward, usually time.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+
+df = pd.read_csv("employees.csv")
+
+year = pd.to_datetime(df["join_date"]).dt.year
+c = year.value_counts().sort_index()
+
+plt.plot(c.index, c.values)
+plt.xlabel("Year")
+plt.ylabel("People joined")
+plt.show()</code></pre>
+</article>
+<article class="e"><h3>marker</h3>
+<div class="what"><span class="lbl">In short</span><p>Marks each actual data point, so a reader can see where the real values are rather than only the line.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+
+df = pd.read_csv("employees.csv")
+
+year = pd.to_datetime(df["join_date"]).dt.year
+c = year.value_counts().sort_index()
+
+plt.plot(c.index, c.values, marker="o")
+plt.show()</code></pre>
+</article>
+<article class="e"><h3>Two lines, and a legend</h3>
+<div class="what"><span class="lbl">In short</span><p>Call plot twice and label each one. Without the legend nobody knows which line is which.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+
+df = pd.read_csv("employees.csv")
+
+yr = pd.to_datetime(df["join_date"]).dt.year
+tech  = yr[df["department"] == "Tech"].value_counts().sort_index()
+sales = yr[df["department"] == "Sales"].value_counts().sort_index()
+
+plt.plot(tech.index, tech.values, marker="o", label="Tech")
+plt.plot(sales.index, sales.values, marker="o", label="Sales")
+plt.legend()
+plt.show()</code></pre>
+</article>
+<h2 class="cat" id="seaborn">Seaborn</h2>
+<article class="e"><h3>Importing it</h3>
+<div class="what"><span class="lbl">In short</span><p>A library built on top of matplotlib. The charts take a DataFrame directly and look better by default.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+
+df = pd.read_csv("employees.csv")
+
+<span class="k">import</span> seaborn <span class="k">as</span> sns
+
+sns.countplot(data=df, x="department")
+plt.show()</code></pre>
+</article>
+<article class="e"><h3>A scatter plot, coloured by a column</h3>
+<div class="what"><span class="lbl">In short</span><p>hue splits the dots by a category, which matplotlib would need a loop to do.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+
+df = pd.read_csv("employees.csv")
+
+<span class="k">import</span> seaborn <span class="k">as</span> sns
+
+sns.scatterplot(data=df, x="experience", y="salary", hue="department")
+plt.show()</code></pre>
+</article>
+<article class="e"><h3>A box plot per category</h3>
+<div class="what"><span class="lbl">In short</span><p>One box for each group, side by side, from a single line.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+
+df = pd.read_csv("employees.csv")
+
+<span class="k">import</span> seaborn <span class="k">as</span> sns
+
+sns.boxplot(data=df, x="department", y="experience")
+plt.show()</code></pre>
+</article>
+<article class="e"><h3>The correlation heatmap</h3>
+<div class="what"><span class="lbl">In short</span><p>corr() gives the correlation between every pair of numeric columns; heatmap turns that table into colour.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+
+df = pd.read_csv("employees.csv")
+
+<span class="k">import</span> seaborn <span class="k">as</span> sns
+
+nums = df[["experience", "age", "height_cm", "salary"]]
+<span class="k">print</span>(nums.corr().<span class="k">round</span>(<span class="o">2</span>))
+
+sns.heatmap(nums.corr(), annot=<span class="k">True</span>, cmap="coolwarm")
+plt.show()</code></pre>
+<div class="lbl mt">Output</div><div class="out">            experience   age  height_cm  salary
+experience        1.00  0.04       0.02    0.08
+age               0.04  1.00       0.04    0.02
+height_cm         0.02  0.04       1.00    0.06
+salary            0.08  0.02       0.06    1.00
+&lt;s&gt;:12: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown</div>
+</article>
+<article class="e"><h3>Reading the heatmap</h3>
+<div class="what"><span class="lbl">In short</span><p>1 is a perfect positive relationship, -1 perfect negative, 0 none. The diagonal is always 1 because every column matches itself.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+
+df = pd.read_csv("employees.csv")
+
+nums = df[["experience", "age", "height_cm", "salary"]]
+c = nums.corr().<span class="k">round</span>(<span class="o">3</span>)
+<span class="k">print</span>(c["salary"].sort_values(ascending=<span class="k">False</span>))</code></pre>
+<div class="lbl mt">Output</div><div class="out">salary        1.000
+experience    0.079
+height_cm     0.061
+age           0.017
+Name: salary, dtype: float64</div>
+</article></section>
+<section class="sec" id="excel"><p class="blurb">The same analysis on a grid - formulas, lookups, pivot tables and the summary sheet.</p><nav class="jump"><a href="#getting-started">Getting started</a><a href="#absolute-references">Absolute references</a><a href="#cleaning">Cleaning</a><a href="#conditions">Conditions</a><a href="#lookups">Lookups</a><a href="#pivot-tables">Pivot tables</a><a href="#charts-and-the-summary">Charts and the summary</a></nav><h2 class="cat" id="getting-started">Getting started</h2>
+<article class="e"><h3>The equals sign</h3>
+<div class="what"><span class="lbl">In short</span><p>A cell holds either a value or a formula. Anything starting with = is a formula and is worked out; anything else is stored as typed.</p></div>
+<div class="lbl mt">Code</div><pre><code>38            a value
+=20+18        a formula, shows 38
+=K5           an address, shows whatever K5 holds</code></pre>
+</article>
+<article class="e"><h3>A range, with a colon</h3>
+<div class="what"><span class="lbl">In short</span><p>The colon means THROUGH. K2:K201 is every cell from K2 down to K201.</p></div>
+<div class="lbl mt">Code</div><pre><code>=SUM(K2:K201)</code></pre>
+<div class="lbl mt">Output</div><div class="out">18,974,273</div>
+</article>
+<article class="e"><h3>COUNT and COUNTA</h3>
+<div class="what"><span class="lbl">In short</span><p>COUNT only counts numbers. COUNTA counts anything that is not empty, including text.</p></div>
+<div class="lbl mt">Code</div><pre><code>=COUNTA(C2:C201)      names
+=COUNT(I2:I201)       ages
+=COUNT(K2:K201)       salaries</code></pre>
+<div class="lbl mt">Output</div><div class="out">200
+199
+198</div>
+</article>
+<article class="e"><h3>COUNTBLANK</h3>
+<div class="what"><span class="lbl">In short</span><p>Counts the empty cells in a range. The gap between COUNTA and COUNT is the same information.</p></div>
+<div class="lbl mt">Code</div><pre><code>=COUNTBLANK(K2:K201)</code></pre>
+<div class="lbl mt">Output</div><div class="out">2</div>
+</article>
+<article class="e"><h3>SUM, AVERAGE, MEDIAN</h3>
+<div class="what"><span class="lbl">In short</span><p>AVERAGE skips blank cells rather than treating them as zero, so it divides by 198 here, not 200.</p></div>
+<div class="lbl mt">Code</div><pre><code>=SUM(K2:K201)
+=AVERAGE(K2:K201)
+=MEDIAN(K2:K201)</code></pre>
+<div class="lbl mt">Output</div><div class="out">18,974,273
+95,829.66
+68,841</div>
+</article>
+<article class="e"><h3>MIN and MAX</h3>
+<div class="what"><span class="lbl">In short</span><p>The smallest and largest value in a range. A quick way to spot a value that cannot be real.</p></div>
+<div class="lbl mt">Code</div><pre><code>=MIN(I2:I201)         youngest
+=MAX(I2:I201)         oldest</code></pre>
+<div class="lbl mt">Output</div><div class="out">-4
+210</div>
+</article>
+<article class="e"><h3>Mean against median</h3>
+<div class="what"><span class="lbl">In short</span><p>When the two disagree by a lot, one extreme value is pulling the average. Here the gap is about 27,000.</p></div>
+<div class="lbl mt">Code</div><pre><code>=AVERAGE(K2:K201)
+=MEDIAN(K2:K201)
+=AVERAGE(K2:K201)-MEDIAN(K2:K201)</code></pre>
+<div class="lbl mt">Output</div><div class="out">95,829.66
+68,841
+26,988.66</div>
+</article>
+<h2 class="cat" id="absolute-references">Absolute references</h2>
+<article class="e"><h3>Relative by default</h3>
+<div class="what"><span class="lbl">In short</span><p>Copying a formula down shifts every reference down with it. Usually that is what you want.</p></div>
+<div class="lbl mt">Code</div><pre><code>M2    =K2-Q10
+      fill down
+M3    =K3-Q11      &amp;lt;-- Q11 moved too, and is empty</code></pre>
+</article>
+<article class="e"><h3>The dollar sign locks it</h3>
+<div class="what"><span class="lbl">In short</span><p>$Q$10 stays at Q10 however far the formula is copied. $Q locks the column, $10 locks the row.</p></div>
+<div class="lbl mt">Code</div><pre><code>M2    =K2-$Q$10
+      fill down
+M3    =K3-$Q$10      &amp;lt;-- stayed put</code></pre>
+</article>
+<article class="e"><h3>Why it matters</h3>
+<div class="what"><span class="lbl">In short</span><p>Without the dollars the column quietly becomes a copy of the one beside it. Nothing turns red.</p></div>
+<div class="lbl mt">Code</div><pre><code>=K2-Q10       wrong, and looks plausible
+=K2-$Q$10     right</code></pre>
+</article>
+<h2 class="cat" id="cleaning">Cleaning</h2>
+<article class="e"><h3>Sort</h3>
+<div class="what"><span class="lbl">In short</span><p>Data &gt; Sort. Always sort the whole table, never a single column, or the rows come apart.</p></div>
+<div class="lbl mt">Code</div><pre><code>Data  &amp;gt;  Sort  &amp;gt;  Sort by: salary  &amp;gt;  Largest to Smallest</code></pre>
+</article>
+<article class="e"><h3>Filter</h3>
+<div class="what"><span class="lbl">In short</span><p>Data &gt; Filter puts a dropdown on every heading. It hides rows rather than deleting them.</p></div>
+<div class="lbl mt">Code</div><pre><code>Data  &amp;gt;  Filter        then pick values from the heading dropdown</code></pre>
+</article>
+<article class="e"><h3>Remove Duplicates</h3>
+<div class="what"><span class="lbl">In short</span><p>Data &gt; Remove Duplicates. It deletes rows permanently, so take a copy of the sheet first.</p></div>
+<div class="lbl mt">Code</div><pre><code>Data  &amp;gt;  Remove Duplicates
+
+201 rows  -&gt;  200 rows      (1 duplicate removed)</code></pre>
+</article>
+<article class="e"><h3>TRIM</h3>
+<div class="what"><span class="lbl">In short</span><p>Removes spaces from both ends of a value. Stray spaces break lookups and comparisons invisibly.</p></div>
+<div class="lbl mt">Code</div><pre><code>=TRIM("   Rahul Sharma   ")</code></pre>
+<div class="lbl mt">Output</div><div class="out">Rahul Sharma</div>
+</article>
+<article class="e"><h3>Find and Replace</h3>
+<div class="what"><span class="lbl">In short</span><p>Ctrl+H. Replaces text across the sheet in one pass.</p></div>
+<div class="lbl mt">Code</div><pre><code>Ctrl + H      Find: HR      Replace with: Human Resources</code></pre>
+</article>
+<article class="e"><h3>Text to Columns</h3>
+<div class="what"><span class="lbl">In short</span><p>Splits one column into several on a delimiter. It runs once; it does not keep watching the column.</p></div>
+<div class="lbl mt">Code</div><pre><code>Data  &amp;gt;  Text to Columns  &amp;gt;  Delimited  &amp;gt;  Space
+
+Rahul Sharma   -&gt;   Rahul | Sharma</code></pre>
+</article>
+<article class="e"><h3>Conditional formatting</h3>
+<div class="what"><span class="lbl">In short</span><p>Colours cells that meet a rule, so a problem is visible without reading every row.</p></div>
+<div class="lbl mt">Code</div><pre><code>Home  &amp;gt;  Conditional Formatting  &amp;gt;  Highlight Cells Rules  &amp;gt;  Less Than  &amp;gt;  0
+
+(age -4 turns red)</code></pre>
+</article>
+<h2 class="cat" id="conditions">Conditions</h2>
+<article class="e"><h3>IF</h3>
+<div class="what"><span class="lbl">In short</span><p>One test, two answers. The test comes first, then what to show when it is true, then when it is false.</p></div>
+<div class="lbl mt">Code</div><pre><code>=IF(K2&amp;gt;$Q$5, "Above average", "Below average")</code></pre>
+</article>
+<article class="e"><h3>IFS</h3>
+<div class="what"><span class="lbl">In short</span><p>More than two outcomes. Excel checks the conditions in order and stops at the first true one, so order matters.</p></div>
+<div class="lbl mt">Code</div><pre><code>=IFS(H2&amp;lt;=2, "Junior", H2&amp;lt;=7, "Mid", H2&amp;gt;=0, "Senior")</code></pre>
+</article>
+<article class="e"><h3>COUNTIF</h3>
+<div class="what"><span class="lbl">In short</span><p>Counts the cells in a range that meet one condition.</p></div>
+<div class="lbl mt">Code</div><pre><code>=COUNTIF(D2:D201, "Tech")</code></pre>
+<div class="lbl mt">Output</div><div class="out">49</div>
+</article>
+<article class="e"><h3>SUMIF</h3>
+<div class="what"><span class="lbl">In short</span><p>Range to test, the condition, then the range to add up. Three arguments, in that order.</p></div>
+<div class="lbl mt">Code</div><pre><code>=SUMIF(D2:D201, "Tech", K2:K201)</code></pre>
+<div class="lbl mt">Output</div><div class="out">9,108,170</div>
+</article>
+<article class="e"><h3>AVERAGEIF</h3>
+<div class="what"><span class="lbl">In short</span><p>The same shape as SUMIF. It also skips blanks, so the divisor may be smaller than the headcount.</p></div>
+<div class="lbl mt">Code</div><pre><code>=AVERAGEIF(D2:D201, "HR", K2:K201)
+=AVERAGEIF(D2:D201, "Tech", K2:K201)</code></pre>
+<div class="lbl mt">Output</div><div class="out">56,705.14
+189,753.54</div>
+</article>
+<article class="e"><h3>COUNTIFS  —  two conditions</h3>
+<div class="what"><span class="lbl">In short</span><p>Pairs of range and condition. Every pair must be true for the row to count.</p></div>
+<div class="lbl mt">Code</div><pre><code>=COUNTIFS(D2:D201, "Tech", K2:K201, "&amp;gt;50000")</code></pre>
+<div class="lbl mt">Output</div><div class="out">48</div>
+</article>
+<article class="e"><h3>A condition built from a cell</h3>
+<div class="what"><span class="lbl">In short</span><p>To compare against a value in a cell, put the operator in quotes and join it with &amp;amp;.</p></div>
+<div class="lbl mt">Code</div><pre><code>=COUNTIF(K2:K201, "&amp;gt;"&amp;amp;$Q$5)      above the average in Q5
+=COUNTIF(K2:K201, "&amp;lt;"&amp;amp;$Q$5)      below it</code></pre>
+<div class="lbl mt">Output</div><div class="out">12
+186</div>
+</article>
+<article class="e"><h3>The counts will not always add up</h3>
+<div class="what"><span class="lbl">In short</span><p>12 above and 186 below is 198, not 200. The two blank salaries are neither, and COUNTIF simply skips them.</p></div>
+<div class="lbl mt">Code</div><pre><code>=COUNTIF(K2:K201, "&amp;gt;"&amp;amp;$Q$5) + COUNTIF(K2:K201, "&amp;lt;"&amp;amp;$Q$5)</code></pre>
+<div class="lbl mt">Output</div><div class="out">198</div>
+</article>
+<h2 class="cat" id="lookups">Lookups</h2>
+<article class="e"><h3>VLOOKUP</h3>
+<div class="what"><span class="lbl">In short</span><p>What to look for, where to look, which column to bring back, and exact or approximate. Four arguments.</p></div>
+<div class="lbl mt">Code</div><pre><code>=VLOOKUP(G2, bonus!$A$2:$B$5, 2, FALSE)</code></pre>
+</article>
+<article class="e"><h3>Always FALSE</h3>
+<div class="what"><span class="lbl">In short</span><p>The fourth argument is optional, and leaving it out gives approximate matching, silently and wrongly. Type FALSE every time.</p></div>
+<div class="lbl mt">Code</div><pre><code>=VLOOKUP(G2, bonus!$A$2:$B$5, 2, FALSE)      exact
+=VLOOKUP(G2, bonus!$A$2:$B$5, 2)             approximate - avoid</code></pre>
+</article>
+<article class="e"><h3>Lock the lookup table</h3>
+<div class="what"><span class="lbl">In short</span><p>Without the dollar signs the table slides down as you fill the formula, and rows start returning #N/A.</p></div>
+<div class="lbl mt">Code</div><pre><code>=VLOOKUP(G2, bonus!$A$2:$B$5, 2, FALSE)      locked
+=VLOOKUP(G2, bonus!A2:B5,     2, FALSE)      slides - wrong</code></pre>
+</article>
+<article class="e"><h3>#N/A means not found</h3>
+<div class="what"><span class="lbl">In short</span><p>It is a sentence, not a crash: the value you asked for is not in the table you pointed at. Often a data problem rather than a formula one.</p></div>
+<div class="lbl mt">Code</div><pre><code>=VLOOKUP("Outstanding", bonus!$A$2:$B$5, 2, FALSE)</code></pre>
+<div class="lbl mt">Output</div><div class="out">#N/A</div>
+</article>
+<article class="e"><h3>IFERROR</h3>
+<div class="what"><span class="lbl">In short</span><p>Replaces an error with something readable. It hides the error; it does not fix the missing data.</p></div>
+<div class="lbl mt">Code</div><pre><code>=IFERROR(VLOOKUP(G2, bonus!$A$2:$B$5, 2, FALSE), "Not found")</code></pre>
+</article>
+<article class="e"><h3>VLOOKUP only looks right</h3>
+<div class="what"><span class="lbl">In short</span><p>The value you search for must be in the first column of the range. It cannot return anything to the left of it.</p></div>
+<div class="lbl mt">Code</div><pre><code>VLOOKUP searches column 1 of the range and returns a column to its RIGHT.
+To look left, use INDEX + MATCH or XLOOKUP.</code></pre>
+</article>
+<article class="e"><h3>INDEX and MATCH</h3>
+<div class="what"><span class="lbl">In short</span><p>MATCH finds the position, INDEX returns the value at that position. Together they look in any direction.</p></div>
+<div class="lbl mt">Code</div><pre><code>=MATCH("Karthik Reddy", C2:C201, 0)        the position
+=INDEX(A2:A201, 3)                        the value there
+=INDEX(A2:A201, MATCH("Karthik Reddy", C2:C201, 0))</code></pre>
+</article>
+<article class="e"><h3>XLOOKUP</h3>
+<div class="what"><span class="lbl">In short</span><p>Replaces all of the above. What to find, where to look, what to return, and what to show if nothing matches.</p></div>
+<div class="lbl mt">Code</div><pre><code>=XLOOKUP(G2, bonus!$A$2:$A$5, bonus!$B$2:$B$5, "Not found")</code></pre>
+</article>
+<h2 class="cat" id="pivot-tables">Pivot tables</h2>
+<article class="e"><h3>The four boxes</h3>
+<div class="what"><span class="lbl">In short</span><p>Rows is what goes down the side, Columns across the top, Values the number to calculate, Filters which data to include.</p></div>
+<div class="lbl mt">Code</div><pre><code>Insert  &amp;gt;  PivotTable  &amp;gt;  New Worksheet
+
+Rows     what goes down
+Columns  what goes across
+Values   what to calculate
+Filters  what to include</code></pre>
+</article>
+<article class="e"><h3>Count</h3>
+<div class="what"><span class="lbl">In short</span><p>Drag a text column into Values and Excel counts it. This is COUNTIF for every category at once.</p></div>
+<div class="lbl mt">Code</div><pre><code>Rows    department
+Values  Count of name</code></pre>
+<div class="lbl mt">Output</div><div class="out">HR            45
+Marketing     42
+Sales         64
+Tech          49
+Grand Total  200</div>
+</article>
+<article class="e"><h3>Read the heading</h3>
+<div class="what"><span class="lbl">In short</span><p>Count of salary and Sum of salary are different questions. The heading tells you which one Excel answered.</p></div>
+<div class="lbl mt">Code</div><pre><code>Values  Count of salary        how many salaries exist
+Values  Sum of salary          the total
+Values  Average of salary      the mean</code></pre>
+<div class="lbl mt">Output</div><div class="out">Count 198   not 200, because 2 are blank</div>
+</article>
+<article class="e"><h3>Sum and Average</h3>
+<div class="what"><span class="lbl">In short</span><p>Right-click any number and choose Summarize Values By.</p></div>
+<div class="lbl mt">Code</div><pre><code>Right-click  &amp;gt;  Summarize Values By  &amp;gt;  Sum / Average</code></pre>
+<div class="lbl mt">Output</div><div class="out">Sum of salary          Average of salary
+HR         2,495,026       56,705.14
+Marketing  3,106,086       73,954.43
+Sales      4,264,991       66,640.48
+Tech       9,108,170      189,753.54</div>
+</article>
+<article class="e"><h3>Two dimensions</h3>
+<div class="what"><span class="lbl">In short</span><p>Put a second category in Columns and you get a grid. Excel sorts the labels alphabetically.</p></div>
+<div class="lbl mt">Code</div><pre><code>Rows     department
+Columns  rating
+Values   Count of name</code></pre>
+<div class="lbl mt">Output</div><div class="out">           Poor  Average  Good  Excellent   Total
+HR           12        9    11         13      45
+Marketing    14       11     8          9      42
+Sales        17       14    19         14      64
+Tech         15        8    13         13      49</div>
+</article>
+<article class="e"><h3>Percentage of total</h3>
+<div class="what"><span class="lbl">In short</span><p>Drag the same field into Values twice, then set the second to show a percentage.</p></div>
+<div class="lbl mt">Code</div><pre><code>Right-click the second column  &amp;gt;  Show Values As  &amp;gt;  % of Grand Total</code></pre>
+<div class="lbl mt">Output</div><div class="out">HR         45    22.50%
+Marketing  42    21.00%
+Sales      64    32.00%
+Tech       49    24.50%</div>
+</article>
+<article class="e"><h3>Refresh</h3>
+<div class="what"><span class="lbl">In short</span><p>A pivot table is a snapshot. Change the data underneath and it does not update until you tell it to.</p></div>
+<div class="lbl mt">Code</div><pre><code>Right-click inside the pivot  &amp;gt;  Refresh
+Data  &amp;gt;  Refresh All          (every pivot in the workbook)</code></pre>
+</article>
+<h2 class="cat" id="charts-and-the-summary">Charts and the summary</h2>
+<article class="e"><h3>A chart from a pivot table</h3>
+<div class="what"><span class="lbl">In short</span><p>Click inside the pivot and insert a chart. Excel takes the categories and values straight from it.</p></div>
+<div class="lbl mt">Code</div><pre><code>Click inside the pivot  &amp;gt;  Insert  &amp;gt;  Clustered Column</code></pre>
+</article>
+<article class="e"><h3>Title, axes, legend</h3>
+<div class="what"><span class="lbl">In short</span><p>Turn titles on from the + button. One series needs no legend; more than one does.</p></div>
+<div class="lbl mt">Code</div><pre><code>click the chart  &amp;gt;  +  &amp;gt;  [x] Chart Title  [x] Axis Titles  [ ] Legend
+
+one series   -&amp;gt;  no legend
+many series  -&amp;gt;  legend</code></pre>
+</article>
+<article class="e"><h3>Number formatting</h3>
+<div class="what"><span class="lbl">In short</span><p>Changes how a number looks, never what it is. Every formula still sees the original value.</p></div>
+<div class="lbl mt">Code</div><pre><code>Home  &amp;gt;  Number  &amp;gt;  Comma Style
+
+5200000   -&gt;   5,200,000</code></pre>
+</article>
+<article class="e"><h3>Data bars</h3>
+<div class="what"><span class="lbl">In short</span><p>A bar drawn inside the cell, so values can be compared without reading them. Keep the numbers visible beside it.</p></div>
+<div class="lbl mt">Code</div><pre><code>Home  &amp;gt;  Conditional Formatting  &amp;gt;  Data Bars</code></pre>
+</article>
+<article class="e"><h3>What a summary sheet needs</h3>
+<div class="what"><span class="lbl">In short</span><p>A title, a date, how many rows it describes, at least one chart, and a sentence saying what the numbers mean.</p></div>
+<div class="lbl mt">Code</div><pre><code>Title + Date
+      +
+      n
+      +
+    Chart
+      +
+Caveat / Finding</code></pre>
+</article>
+<article class="e"><h3>A number is not a finding</h3>
+<div class="what"><span class="lbl">In short</span><p>The average alone is true and misleading. Reporting the median beside it, and naming the cause, is the analysis.</p></div>
+<div class="lbl mt">Code</div><pre><code>Average salary   95,829.66
+Median salary    68,841
+
+"One employee earns 52,00,000, which pulls the average up.
+Medians are shown alongside averages for this reason."</code></pre>
+</article></section>
+<footer>TAP Academy &mdash; Data Analytics &middot; 259 entries, all executed</footer>
 </div>
 <button class="tt" id="tt">Theme</button>
 <script>
