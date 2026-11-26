@@ -80,8 +80,2355 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--sienna);outline-off
  <h1>Student Reference</h1>
  <p class="sub">Everything from the course in one place. Every example was run for real, so the
  output you see is the output you will get.</p>
- <div class="tabs"><button class="tab" data-go="numpy">NumPy <span>50</span></button><button class="tab" data-go="pandas">Pandas <span>77</span></button><button class="tab" data-go="statistics">Statistics <span>49</span></button><button class="tab" data-go="probability">Probability <span>12</span></button><button class="tab" data-go="viz">Charts <span>25</span></button><button class="tab" data-go="excel">Excel <span>46</span></button></div>
+ <div class="tabs"><button class="tab" data-go="python">Python <span>185</span></button><button class="tab" data-go="numpy">NumPy <span>50</span></button><button class="tab" data-go="pandas">Pandas <span>77</span></button><button class="tab" data-go="statistics">Statistics <span>49</span></button><button class="tab" data-go="probability">Probability <span>12</span></button><button class="tab" data-go="viz">Charts <span>25</span></button><button class="tab" data-go="excel">Excel <span>46</span></button></div>
 </header>
+<section class="sec" id="python"><p class="blurb">The language itself &mdash; from your first print to classes and files. Everything the course covered, in the order it was taught. Where an example is meant to fail, the error is shown as Python words it; older versions word a few of them slightly differently, but the error <em>type</em> is the same.</p><nav class="jump">
+<a href="#py-getting-started">Getting started</a>
+<a href="#py-data-types">Data types</a>
+<a href="#py-operators">Operators</a>
+<a href="#py-making-decisions">Making decisions</a>
+<a href="#py-loops">Loops</a>
+<a href="#py-functions">Functions</a>
+<a href="#py-strings">Strings</a>
+<a href="#py-lists">Lists</a>
+<a href="#py-tuples">Tuples</a>
+<a href="#py-sets">Sets</a>
+<a href="#py-dictionaries">Dictionaries</a>
+<a href="#py-classes-and-objects">Classes and objects</a>
+<a href="#py-encapsulation">Encapsulation</a>
+<a href="#py-inheritance">Inheritance</a>
+<a href="#py-polymorphism">Polymorphism</a>
+<a href="#py-abstraction">Abstraction</a>
+<a href="#py-modules">Modules</a>
+<a href="#py-files">Files</a>
+</nav>
+<h2 class="cat" id="py-getting-started">Getting started</h2>
+<article class="e"><h3>print()</h3>
+<div class="why"><span class="lbl">Why it exists</span><p>The only way you can see what your code did. Nothing you write means anything until you print it, and most debugging is nothing more clever than printing the thing you doubt.</p></div>
+<div class="what"><span class="lbl">In short</span><p>Puts something on the screen. Several things separated by commas get a space between them.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">print</span>("Hello, Data Analytics")
+<span class="k">print</span>("TAP", "Academy")
+<span class="k">print</span>(<span class="o">10</span> + <span class="o">5</span>)</code></pre>
+<div class="lbl mt">Output</div><div class="out">Hello, Data Analytics
+TAP Academy
+15</div>
+</article>
+<article class="e"><h3>Comments</h3>
+<div class="what"><span class="lbl">In short</span><p>Anything after a # on a line is ignored by Python. It is a note to the next person reading it, who is usually you in three weeks.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="c"># this whole line is ignored</span>
+salary = <span class="o">50000</span>      <span class="c"># so is everything after the hash</span>
+<span class="k">print</span>(salary)</code></pre>
+<div class="lbl mt">Output</div><div class="out">50000</div>
+</article>
+<article class="e"><h3>Variables</h3>
+<div class="what"><span class="lbl">In short</span><p>A name pointing at a value. Use = to make it point. You can point it at something else later, and you do not have to say what type it is.</p></div>
+<div class="lbl mt">Code</div><pre><code>name = "Priya"
+salary = <span class="o">50000</span>
+<span class="k">print</span>(name, "earns", salary)
+
+salary = <span class="o">62000</span>      <span class="c"># the old value is gone</span>
+<span class="k">print</span>(salary)</code></pre>
+<div class="lbl mt">Output</div><div class="out">Priya earns 50000
+62000</div>
+</article>
+<article class="e"><h3>Several variables at once</h3>
+<div class="what"><span class="lbl">In short</span><p>One line can set up more than one name.</p></div>
+<div class="lbl mt">Code</div><pre><code>a, b, c = <span class="o">10</span>, <span class="o">20</span>, <span class="o">30</span>
+<span class="k">print</span>(a, b, c)
+
+x = y = <span class="o">5</span>           <span class="c"># both point at the same 5</span>
+<span class="k">print</span>(x, y)</code></pre>
+<div class="lbl mt">Output</div><div class="out">10 20 30
+5 5</div>
+</article>
+<article class="e"><h3>Naming rules</h3>
+<div class="what"><span class="lbl">In short</span><p>Letters, digits and underscores. It cannot start with a digit, it cannot contain a space or a dash, and it is case sensitive, so Salary and salary are two different variables.</p></div>
+<div class="lbl mt">Code</div><pre><code>emp_name = "Arun"        <span class="c"># good</span>
+emp2 = "Kavita"          <span class="c"># good</span>
+_total = <span class="o">100</span>             <span class="c"># allowed</span>
+
+Salary = <span class="o">1</span>
+salary = <span class="o">2</span>
+<span class="k">print</span>(Salary, salary)    <span class="c"># two different boxes</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">1 2</div>
+</article>
+<article class="e"><h3>input()</h3>
+<div class="why"><span class="lbl">Why it exists</span><p>The first time your program depends on somebody else. Everything about reading a CSV later is the same idea: the data comes from outside, and you cannot assume what it is.</p></div>
+<div class="what"><span class="lbl">In short</span><p>Stops and waits for the person to type something, then hands it back. The text in the brackets is the prompt. What somebody types is not part of the output, so in the box below the prompt and the next line of output run together; on your own screen you would see Sharath on the end of the first line.</p></div>
+<div class="lbl mt">Code</div><pre><code>name = <span class="k">input</span>("Your name: ")       <span class="c"># typed: Sharath</span>
+<span class="k">print</span>("Welcome,", name)</code></pre>
+<div class="lbl mt">Output</div><div class="out">Your name: Welcome, Sharath</div>
+</article>
+<article class="e"><h3>input() always gives you text</h3>
+<div class="what"><span class="lbl">In short</span><p>Whatever is typed arrives as a string, even if it looks like a number. Wrap it in int() or float() before you do maths with it. 30 typed twice gives 3030, which is the clearest symptom there is.</p></div>
+<div class="lbl mt">Code</div><pre><code>age = <span class="k">input</span>("Age: ")              <span class="c"># typed: 30</span>
+<span class="k">print</span>(<span class="k">type</span>(age))
+<span class="k">print</span>(age + age)                  <span class="c"># text joined, not added</span>
+
+age = <span class="k">int</span>(<span class="k">input</span>("Age again: "))   <span class="c"># typed: 30</span>
+<span class="k">print</span>(<span class="k">type</span>(age))
+<span class="k">print</span>(age + age)                  <span class="c"># now it adds</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">Age: &lt;class 'str'&gt;
+3030
+Age again: &lt;class 'int'&gt;
+60</div>
+</article>
+<article class="e"><h3>sep and end</h3>
+<div class="what"><span class="lbl">In short</span><p>sep changes what goes between the items. end changes what goes at the end instead of a new line.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">print</span>("2026", "11", "26", sep="-")
+<span class="k">print</span>("no new line here...", end=" ")
+<span class="k">print</span>("same line")</code></pre>
+<div class="lbl mt">Output</div><div class="out">2026-11-26
+no new line here... same line</div>
+</article>
+<article class="e"><h3>type()</h3>
+<div class="what"><span class="lbl">In short</span><p>Tells you what kind of thing a value is. Reach for it the moment something behaves oddly.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">print</span>(<span class="k">type</span>(<span class="o">10</span>))
+<span class="k">print</span>(<span class="k">type</span>(<span class="o">10.5</span>))
+<span class="k">print</span>(<span class="k">type</span>("TAP"))
+<span class="k">print</span>(<span class="k">type</span>(<span class="k">True</span>))</code></pre>
+<div class="lbl mt">Output</div><div class="out">&lt;class 'int'&gt;
+&lt;class 'float'&gt;
+&lt;class 'str'&gt;
+&lt;class 'bool'&gt;</div>
+</article>
+<h2 class="cat" id="py-data-types">Data types</h2>
+<article class="e"><h3>int</h3>
+<div class="what"><span class="lbl">In short</span><p>A whole number, positive or negative, with no decimal point. No size limit in Python.</p></div>
+<div class="lbl mt">Code</div><pre><code>emp_id = <span class="o">1004</span>
+loss = -<span class="o">250</span>
+big = <span class="o">52000000</span>
+<span class="k">print</span>(emp_id, loss, big)
+<span class="k">print</span>(<span class="k">type</span>(emp_id))</code></pre>
+<div class="lbl mt">Output</div><div class="out">1004 -250 52000000
+&lt;class 'int'&gt;</div>
+</article>
+<article class="e"><h3>float</h3>
+<div class="what"><span class="lbl">In short</span><p>A number with a decimal point. Also what you get from any division.</p></div>
+<div class="lbl mt">Code</div><pre><code>rating = <span class="o">4.5</span>
+<span class="k">print</span>(rating, <span class="k">type</span>(rating))
+<span class="k">print</span>(<span class="o">10</span> / <span class="o">2</span>)              <span class="c"># division always gives a float</span>
+<span class="k">print</span>(<span class="k">type</span>(<span class="o">10</span> / <span class="o">2</span>))</code></pre>
+<div class="lbl mt">Output</div><div class="out">4.5 &lt;class 'float'&gt;
+5.0
+&lt;class 'float'&gt;</div>
+</article>
+<article class="e"><h3>str</h3>
+<div class="what"><span class="lbl">In short</span><p>Text. Single or double quotes, it makes no difference. Triple quotes let the text run over several lines.</p></div>
+<div class="lbl mt">Code</div><pre><code>a = 'Priya'
+b = "Priya"
+<span class="k">print</span>(a == b)
+
+note = """line one
+line two"""
+<span class="k">print</span>(note)</code></pre>
+<div class="lbl mt">Output</div><div class="out">True
+line one
+line two</div>
+</article>
+<article class="e"><h3>bool</h3>
+<div class="what"><span class="lbl">In short</span><p>Only two values, True and False, with capital letters. Every comparison produces one.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">print</span>(<span class="k">True</span>, <span class="k">False</span>)
+<span class="k">print</span>(<span class="k">type</span>(<span class="k">True</span>))
+<span class="k">print</span>(<span class="o">50000</span> &gt; <span class="o">40000</span>)
+<span class="k">print</span>(<span class="o">10</span> == <span class="o">11</span>)</code></pre>
+<div class="lbl mt">Output</div><div class="out">True False
+&lt;class 'bool'&gt;
+True
+False</div>
+</article>
+<article class="e"><h3>None</h3>
+<div class="why"><span class="lbl">Why it exists</span><p>Every real dataset has holes in it. None is what a hole looks like in plain Python, and pandas calls the same idea NaN. Knowing it is not zero saves you from averaging rubbish.</p></div>
+<div class="what"><span class="lbl">In short</span><p>The value that means "nothing here yet". It is not 0 and it is not an empty string.</p></div>
+<div class="lbl mt">Code</div><pre><code>manager = <span class="k">None</span>
+<span class="k">print</span>(manager)
+<span class="k">print</span>(<span class="k">type</span>(manager))
+<span class="k">print</span>(manager == <span class="o">0</span>)
+<span class="k">print</span>(manager <span class="k">is</span> <span class="k">None</span>)     <span class="c"># this is how you check for it</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">None
+&lt;class 'NoneType'&gt;
+False
+True</div>
+</article>
+<article class="e"><h3>Changing type on purpose</h3>
+<div class="what"><span class="lbl">In short</span><p>int(), float(), str() and bool() make a new value of that type. The original is untouched.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">print</span>(<span class="k">int</span>("42") + <span class="o">1</span>)
+<span class="k">print</span>(<span class="k">float</span>("3.5") + <span class="o">1</span>)
+<span class="k">print</span>(<span class="k">str</span>(<span class="o">42</span>) + "1")
+<span class="k">print</span>(<span class="k">int</span>(<span class="o">9.99</span>))           <span class="c"># chops the decimal off, does not round</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">43
+4.5
+421
+9</div>
+</article>
+<article class="e"><h3>When a conversion is not possible</h3>
+<div class="what"><span class="lbl">In short</span><p>int() on text that is not a number stops the program. Check before you convert.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">print</span>(<span class="k">int</span>("42"))
+<span class="k">print</span>(<span class="k">int</span>("forty two"))</code></pre>
+<div class="lbl mt">Output</div><div class="out">42
+ValueError: invalid literal for int() with base 10: 'forty two'</div>
+</article>
+<article class="e"><h3>What counts as False</h3>
+<div class="what"><span class="lbl">In short</span><p>bool() on almost anything gives True. The exceptions are 0, empty text, empty containers and None.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">print</span>(<span class="k">bool</span>(<span class="o">1</span>), <span class="k">bool</span>(-<span class="o">5</span>), <span class="k">bool</span>("no"), <span class="k">bool</span>(" "))
+<span class="k">print</span>(<span class="k">bool</span>(<span class="o">0</span>), <span class="k">bool</span>(""), <span class="k">bool</span>([]), <span class="k">bool</span>(<span class="k">None</span>))</code></pre>
+<div class="lbl mt">Output</div><div class="out">True True True True
+False False False False</div>
+</article>
+<h2 class="cat" id="py-operators">Operators</h2>
+<article class="e"><h3>Arithmetic</h3>
+<div class="what"><span class="lbl">In short</span><p>The six you use constantly, plus // for whole-number division and % for the remainder.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">print</span>(<span class="o">17</span> + <span class="o">3</span>)
+<span class="k">print</span>(<span class="o">17</span> - <span class="o">3</span>)
+<span class="k">print</span>(<span class="o">17</span> * <span class="o">3</span>)
+<span class="k">print</span>(<span class="o">17</span> / <span class="o">3</span>)        <span class="c"># true division, gives a float</span>
+<span class="k">print</span>(<span class="o">17</span> // <span class="o">3</span>)       <span class="c"># floor division, drops the fraction</span>
+<span class="k">print</span>(<span class="o">17</span> % <span class="o">3</span>)        <span class="c"># remainder</span>
+<span class="k">print</span>(<span class="o">2</span> ** <span class="o">10</span>)       <span class="c"># power</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">20
+14
+51
+5.666666666666667
+5
+2
+1024</div>
+</article>
+<article class="e"><h3>% to test divisibility</h3>
+<div class="what"><span class="lbl">In short</span><p>If the remainder is 0 it divides exactly. This is the standard even-or-odd test.</p></div>
+<div class="lbl mt">Code</div><pre><code>n = <span class="o">24</span>
+<span class="k">print</span>(n % <span class="o">2</span>)
+<span class="k">print</span>(n % <span class="o">2</span> == <span class="o">0</span>)        <span class="c"># even?</span>
+<span class="k">print</span>(<span class="o">25</span> % <span class="o">2</span> == <span class="o">0</span>)</code></pre>
+<div class="lbl mt">Output</div><div class="out">0
+True
+False</div>
+</article>
+<article class="e"><h3>Assignment operators</h3>
+<div class="what"><span class="lbl">In short</span><p>Shorthand for "take what is there, change it, put it back".</p></div>
+<div class="lbl mt">Code</div><pre><code>total = <span class="o">100</span>
+total += <span class="o">50</span>          <span class="c"># same as total = total + 50</span>
+<span class="k">print</span>(total)
+total -= <span class="o">20</span>
+<span class="k">print</span>(total)
+total *= <span class="o">2</span>
+<span class="k">print</span>(total)
+total /= <span class="o">4</span>
+<span class="k">print</span>(total)</code></pre>
+<div class="lbl mt">Output</div><div class="out">150
+130
+260
+65.0</div>
+</article>
+<article class="e"><h3>Comparison</h3>
+<div class="what"><span class="lbl">In short</span><p>Six of them, and every one hands back True or False. Note == for "is it equal" against = for "make it equal".</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">print</span>(<span class="o">50000</span> == <span class="o">50000</span>)
+<span class="k">print</span>(<span class="o">50000</span> != <span class="o">50000</span>)
+<span class="k">print</span>(<span class="o">50000</span> &gt; <span class="o">40000</span>)
+<span class="k">print</span>(<span class="o">50000</span> &lt; <span class="o">40000</span>)
+<span class="k">print</span>(<span class="o">50000</span> &gt;= <span class="o">50000</span>)
+<span class="k">print</span>(<span class="o">50000</span> &lt;= <span class="o">40000</span>)</code></pre>
+<div class="lbl mt">Output</div><div class="out">True
+False
+True
+False
+True
+False</div>
+</article>
+<article class="e"><h3>Logical: and, or, not</h3>
+<div class="what"><span class="lbl">In short</span><p>and needs both sides True. or needs one. not flips it.</p></div>
+<div class="lbl mt">Code</div><pre><code>salary = <span class="o">70000</span>
+dept = "Tech"
+<span class="k">print</span>(salary &gt; <span class="o">60000</span> <span class="k">and</span> dept == "Tech")
+<span class="k">print</span>(salary &gt; <span class="o">90000</span> <span class="k">and</span> dept == "Tech")
+<span class="k">print</span>(salary &gt; <span class="o">90000</span> <span class="k">or</span> dept == "Tech")
+<span class="k">print</span>(<span class="k">not</span> salary &gt; <span class="o">90000</span>)</code></pre>
+<div class="lbl mt">Output</div><div class="out">True
+False
+True
+True</div>
+</article>
+<article class="e"><h3>Membership: in, not in</h3>
+<div class="what"><span class="lbl">In short</span><p>Asks whether something sits inside a string, list, tuple, set or dictionary.</p></div>
+<div class="lbl mt">Code</div><pre><code>depts = ["Sales", "Tech", "HR"]
+<span class="k">print</span>("Tech" <span class="k">in</span> depts)
+<span class="k">print</span>("Legal" <span class="k">in</span> depts)
+<span class="k">print</span>("Legal" <span class="k">not</span> <span class="k">in</span> depts)
+<span class="k">print</span>("ech" <span class="k">in</span> "Tech")        <span class="c"># works on text too</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">True
+False
+True
+True</div>
+</article>
+<article class="e"><h3>Identity: is, is not</h3>
+<div class="what"><span class="lbl">In short</span><p>is asks "are these the very same object", == asks "do these hold the same value". Different questions, and they can disagree.</p></div>
+<div class="lbl mt">Code</div><pre><code>a = [<span class="o">1</span>, <span class="o">2</span>, <span class="o">3</span>]
+b = [<span class="o">1</span>, <span class="o">2</span>, <span class="o">3</span>]
+c = a
+<span class="k">print</span>(a == b)        <span class="c"># same contents</span>
+<span class="k">print</span>(a <span class="k">is</span> b)        <span class="c"># but two separate lists</span>
+<span class="k">print</span>(a <span class="k">is</span> c)        <span class="c"># c is just another name for a</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">True
+False
+True</div>
+</article>
+<article class="e"><h3>Bitwise</h3>
+<div class="what"><span class="lbl">In short</span><p>Works on the binary form of whole numbers. You will rarely need it in analytics, but it was on the operators list, so here it is.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">print</span>(bin(<span class="o">12</span>), bin(<span class="o">10</span>))
+<span class="k">print</span>(<span class="o">12</span> &amp; <span class="o">10</span>)       <span class="c"># AND  -&gt; 1000</span>
+<span class="k">print</span>(<span class="o">12</span> | <span class="o">10</span>)       <span class="c"># OR   -&gt; 1110</span>
+<span class="k">print</span>(<span class="o">12</span> ^ <span class="o">10</span>)       <span class="c"># XOR  -&gt; 0110</span>
+<span class="k">print</span>(<span class="o">12</span> &lt;&lt; <span class="o">1</span>)       <span class="c"># shift left, doubles it</span>
+<span class="k">print</span>(<span class="o">12</span> &gt;&gt; <span class="o">1</span>)       <span class="c"># shift right, halves it</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">0b1100 0b1010
+8
+14
+6
+24
+6</div>
+</article>
+<article class="e"><h3>Precedence</h3>
+<div class="what"><span class="lbl">In short</span><p>Python does ** first, then * / // %, then + -, then comparisons, then not, then and, then or. Brackets beat all of it, and brackets cost nothing.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">print</span>(<span class="o">2</span> + <span class="o">3</span> * <span class="o">4</span>)
+<span class="k">print</span>((<span class="o">2</span> + <span class="o">3</span>) * <span class="o">4</span>)
+<span class="k">print</span>(<span class="o">10</span> - <span class="o">2</span> - <span class="o">3</span>)         <span class="c"># left to right</span>
+<span class="k">print</span>(<span class="o">2</span> ** <span class="o">3</span> ** <span class="o">2</span>)        <span class="c"># but ** goes right to left</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">14
+20
+5
+512</div>
+</article>
+<h2 class="cat" id="py-making-decisions">Making decisions</h2>
+<article class="e"><h3>if</h3>
+<div class="why"><span class="lbl">Why it exists</span><p>The point where a program stops being a calculator. Every filter you will ever write in pandas is this same question asked of a whole column at once.</p></div>
+<div class="what"><span class="lbl">In short</span><p>Runs the indented block only when the condition is True. The colon and the indentation are both compulsory.</p></div>
+<div class="lbl mt">Code</div><pre><code>salary = <span class="o">70000</span>
+<span class="k">if</span> salary &gt; <span class="o">60000</span>:
+    <span class="k">print</span>("above sixty")
+<span class="k">print</span>("this always runs")</code></pre>
+<div class="lbl mt">Output</div><div class="out">above sixty
+this always runs</div>
+</article>
+<article class="e"><h3>if / else</h3>
+<div class="what"><span class="lbl">In short</span><p>One block or the other, never both.</p></div>
+<div class="lbl mt">Code</div><pre><code>salary = <span class="o">45000</span>
+<span class="k">if</span> salary &gt; <span class="o">60000</span>:
+    <span class="k">print</span>("above sixty")
+<span class="k">else</span>:
+    <span class="k">print</span>("sixty or below")</code></pre>
+<div class="lbl mt">Output</div><div class="out">sixty or below</div>
+</article>
+<article class="e"><h3>if / elif / else</h3>
+<div class="what"><span class="lbl">In short</span><p>Checked top to bottom. The first True one wins and the rest are skipped, so order matters.</p></div>
+<div class="lbl mt">Code</div><pre><code>salary = <span class="o">95000</span>
+<span class="k">if</span> salary &gt;= <span class="o">100000</span>:
+    <span class="k">print</span>("band A")
+<span class="k">elif</span> salary &gt;= <span class="o">70000</span>:
+    <span class="k">print</span>("band B")
+<span class="k">elif</span> salary &gt;= <span class="o">40000</span>:
+    <span class="k">print</span>("band C")
+<span class="k">else</span>:
+    <span class="k">print</span>("band D")</code></pre>
+<div class="lbl mt">Output</div><div class="out">band B</div>
+</article>
+<article class="e"><h3>Order of the conditions matters</h3>
+<div class="what"><span class="lbl">In short</span><p>Put the narrowest test first. Written the wrong way round, a later condition can never be reached.</p></div>
+<div class="lbl mt">Code</div><pre><code>salary = <span class="o">150000</span>
+<span class="k">if</span> salary &gt; <span class="o">50000</span>:
+    <span class="k">print</span>("wrong: everybody lands here")
+<span class="k">elif</span> salary &gt; <span class="o">100000</span>:
+    <span class="k">print</span>("never reached")
+
+<span class="k">if</span> salary &gt; <span class="o">100000</span>:
+    <span class="k">print</span>("right: narrowest first")
+<span class="k">elif</span> salary &gt; <span class="o">50000</span>:
+    <span class="k">print</span>("not reached for 150000")</code></pre>
+<div class="lbl mt">Output</div><div class="out">wrong: everybody lands here
+right: narrowest first</div>
+</article>
+<article class="e"><h3>Nested if</h3>
+<div class="what"><span class="lbl">In short</span><p>An if inside an if. Each level is indented one step further.</p></div>
+<div class="lbl mt">Code</div><pre><code>dept = "Tech"
+salary = <span class="o">90000</span>
+<span class="k">if</span> dept == "Tech":
+    <span class="k">if</span> salary &gt; <span class="o">80000</span>:
+        <span class="k">print</span>("senior tech")
+    <span class="k">else</span>:
+        <span class="k">print</span>("tech")
+<span class="k">else</span>:
+    <span class="k">print</span>("not tech")</code></pre>
+<div class="lbl mt">Output</div><div class="out">senior tech</div>
+</article>
+<article class="e"><h3>Combining conditions instead of nesting</h3>
+<div class="what"><span class="lbl">In short</span><p>Two levels of if joined by and say the same thing on one line, and it reads better.</p></div>
+<div class="lbl mt">Code</div><pre><code>dept = "Tech"
+salary = <span class="o">90000</span>
+<span class="k">if</span> dept == "Tech" <span class="k">and</span> salary &gt; <span class="o">80000</span>:
+    <span class="k">print</span>("senior tech")</code></pre>
+<div class="lbl mt">Output</div><div class="out">senior tech</div>
+</article>
+<article class="e"><h3>Deciding with in</h3>
+<div class="what"><span class="lbl">In short</span><p>Checking membership saves a chain of == tests.</p></div>
+<div class="lbl mt">Code</div><pre><code>dept = "HR"
+<span class="k">if</span> dept <span class="k">in</span> ["Sales", "Tech"]:
+    <span class="k">print</span>("revenue side")
+<span class="k">else</span>:
+    <span class="k">print</span>("support side")</code></pre>
+<div class="lbl mt">Output</div><div class="out">support side</div>
+</article>
+<h2 class="cat" id="py-loops">Loops</h2>
+<article class="e"><h3>for with range()</h3>
+<div class="why"><span class="lbl">Why it exists</span><p>Doing the same thing to every row is the whole job. A loop is the first tool for it, and understanding it is what lets you appreciate why NumPy and pandas do it without one.</p></div>
+<div class="what"><span class="lbl">In short</span><p>range(n) counts 0, 1, 2 up to but not including n. That "not including" is where most off-by-one mistakes come from.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">for</span> i <span class="k">in</span> <span class="k">range</span>(<span class="o">5</span>):
+    <span class="k">print</span>(i)</code></pre>
+<div class="lbl mt">Output</div><div class="out">0
+1
+2
+3
+4</div>
+</article>
+<article class="e"><h3>range() with start, stop and step</h3>
+<div class="what"><span class="lbl">In short</span><p>range(start, stop) begins where you say. A third number is the step, and it can be negative.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">for</span> i <span class="k">in</span> <span class="k">range</span>(<span class="o">1</span>, <span class="o">6</span>):
+    <span class="k">print</span>(i, end=" ")
+<span class="k">print</span>()
+
+<span class="k">for</span> i <span class="k">in</span> <span class="k">range</span>(<span class="o">0</span>, <span class="o">21</span>, <span class="o">5</span>):
+    <span class="k">print</span>(i, end=" ")
+<span class="k">print</span>()
+
+<span class="k">for</span> i <span class="k">in</span> <span class="k">range</span>(<span class="o">5</span>, <span class="o">0</span>, -<span class="o">1</span>):
+    <span class="k">print</span>(i, end=" ")
+<span class="k">print</span>()</code></pre>
+<div class="lbl mt">Output</div><div class="out">1 2 3 4 5 
+0 5 10 15 20 
+5 4 3 2 1 </div>
+</article>
+<article class="e"><h3>for over a list</h3>
+<div class="what"><span class="lbl">In short</span><p>The cleanest loop in Python: no counter, no index, just each item in turn.</p></div>
+<div class="lbl mt">Code</div><pre><code>depts = ["Sales", "Tech", "HR", "Legal"]
+<span class="k">for</span> d <span class="k">in</span> depts:
+    <span class="k">print</span>(d)</code></pre>
+<div class="lbl mt">Output</div><div class="out">Sales
+Tech
+HR
+Legal</div>
+</article>
+<article class="e"><h3>for over a string</h3>
+<div class="what"><span class="lbl">In short</span><p>A string is a sequence, so a loop walks it one character at a time.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">for</span> ch <span class="k">in</span> "TAP":
+    <span class="k">print</span>(ch)</code></pre>
+<div class="lbl mt">Output</div><div class="out">T
+A
+P</div>
+</article>
+<article class="e"><h3>Looping with an index</h3>
+<div class="what"><span class="lbl">In short</span><p>When you genuinely need the position, loop over range(len(...)) and use it to reach into the list.</p></div>
+<div class="lbl mt">Code</div><pre><code>depts = ["Sales", "Tech", "HR"]
+<span class="k">for</span> i <span class="k">in</span> <span class="k">range</span>(<span class="k">len</span>(depts)):
+    <span class="k">print</span>(i, depts[i])</code></pre>
+<div class="lbl mt">Output</div><div class="out">0 Sales
+1 Tech
+2 HR</div>
+</article>
+<article class="e"><h3>while</h3>
+<div class="what"><span class="lbl">In short</span><p>Keeps going as long as the condition stays True. Something inside the loop has to change, or it never stops.</p></div>
+<div class="lbl mt">Code</div><pre><code>n = <span class="o">5</span>
+<span class="k">while</span> n &gt; <span class="o">0</span>:
+    <span class="k">print</span>(n, end=" ")
+    n -= <span class="o">1</span>          <span class="c"># without this line it runs forever</span>
+<span class="k">print</span>()
+<span class="k">print</span>("done")</code></pre>
+<div class="lbl mt">Output</div><div class="out">5 4 3 2 1 
+done</div>
+</article>
+<article class="e"><h3>for or while</h3>
+<div class="what"><span class="lbl">In short</span><p>Use for when you know how many times. Use while when you do not, and the loop runs until something becomes true.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="c"># known count -&gt; for</span>
+total = <span class="o">0</span>
+<span class="k">for</span> i <span class="k">in</span> <span class="k">range</span>(<span class="o">1</span>, <span class="o">11</span>):
+    total += i
+<span class="k">print</span>("1 to 10 adds to", total)
+
+<span class="c"># unknown count -&gt; while</span>
+balance = <span class="o">1000</span>
+years = <span class="o">0</span>
+<span class="k">while</span> balance &lt; <span class="o">1500</span>:
+    balance = balance * <span class="o">1.10</span>
+    years += <span class="o">1</span>
+<span class="k">print</span>("doubled past 1500 after", years, "years")</code></pre>
+<div class="lbl mt">Output</div><div class="out">1 to 10 adds to 55
+doubled past 1500 after 5 years</div>
+</article>
+<article class="e"><h3>break</h3>
+<div class="what"><span class="lbl">In short</span><p>Leaves the loop immediately. The rest of the items are not looked at.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">for</span> d <span class="k">in</span> ["Sales", "Tech", "HR", "Legal"]:
+    <span class="k">if</span> d == "HR":
+        <span class="k">print</span>("found HR, stopping")
+        <span class="k">break</span>
+    <span class="k">print</span>("checked", d)</code></pre>
+<div class="lbl mt">Output</div><div class="out">checked Sales
+checked Tech
+found HR, stopping</div>
+</article>
+<article class="e"><h3>continue</h3>
+<div class="what"><span class="lbl">In short</span><p>Skips the rest of this turn and goes straight to the next item. The loop carries on.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">for</span> i <span class="k">in</span> <span class="k">range</span>(<span class="o">1</span>, <span class="o">8</span>):
+    <span class="k">if</span> i % <span class="o">2</span> == <span class="o">0</span>:
+        <span class="k">continue</span>          <span class="c"># skip the even ones</span>
+    <span class="k">print</span>(i, end=" ")
+<span class="k">print</span>()</code></pre>
+<div class="lbl mt">Output</div><div class="out">1 3 5 7 </div>
+</article>
+<article class="e"><h3>pass</h3>
+<div class="what"><span class="lbl">In short</span><p>Does nothing at all. It exists because Python refuses an empty block, so pass is the placeholder you leave while you think.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">for</span> i <span class="k">in</span> <span class="k">range</span>(<span class="o">3</span>):
+    <span class="k">pass</span>
+<span class="k">print</span>("the loop ran and did nothing")</code></pre>
+<div class="lbl mt">Output</div><div class="out">the loop ran and did nothing</div>
+</article>
+<article class="e"><h3>Nested loops</h3>
+<div class="what"><span class="lbl">In short</span><p>A loop inside a loop. The inner one finishes completely for every single turn of the outer one, so 3 x 3 is nine lines of work.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">for</span> i <span class="k">in</span> <span class="k">range</span>(<span class="o">1</span>, <span class="o">4</span>):
+    <span class="k">for</span> j <span class="k">in</span> <span class="k">range</span>(<span class="o">1</span>, <span class="o">4</span>):
+        <span class="k">print</span>(i * j, end="\t")
+    <span class="k">print</span>()</code></pre>
+<div class="lbl mt">Output</div><div class="out">1	2	3	
+2	4	6	
+3	6	9	</div>
+</article>
+<article class="e"><h3>Running a total</h3>
+<div class="what"><span class="lbl">In short</span><p>Start at zero outside the loop, add inside it, print after. The pattern behind every sum you will ever write.</p></div>
+<div class="lbl mt">Code</div><pre><code>salaries = [<span class="o">50000</span>, <span class="o">62000</span>, <span class="o">48000</span>, <span class="o">91000</span>]
+total = <span class="o">0</span>
+<span class="k">for</span> s <span class="k">in</span> salaries:
+    total += s
+<span class="k">print</span>("total", total)
+<span class="k">print</span>("average", total / <span class="k">len</span>(salaries))</code></pre>
+<div class="lbl mt">Output</div><div class="out">total 251000
+average 62750.0</div>
+</article>
+<article class="e"><h3>Counting what matches</h3>
+<div class="what"><span class="lbl">In short</span><p>Same shape, but the counter only moves when the condition holds.</p></div>
+<div class="lbl mt">Code</div><pre><code>salaries = [<span class="o">50000</span>, <span class="o">62000</span>, <span class="o">48000</span>, <span class="o">91000</span>, <span class="o">120000</span>]
+count = <span class="o">0</span>
+<span class="k">for</span> s <span class="k">in</span> salaries:
+    <span class="k">if</span> s &gt; <span class="o">60000</span>:
+        count += <span class="o">1</span>
+<span class="k">print</span>(count, "of", <span class="k">len</span>(salaries), "earn above 60000")</code></pre>
+<div class="lbl mt">Output</div><div class="out">3 of 5 earn above 60000</div>
+</article>
+<article class="e"><h3>Finding the biggest yourself</h3>
+<div class="what"><span class="lbl">In short</span><p>Worth writing once by hand, because it shows you what max() is actually doing.</p></div>
+<div class="lbl mt">Code</div><pre><code>salaries = [<span class="o">50000</span>, <span class="o">62000</span>, <span class="o">48000</span>, <span class="o">91000</span>]
+biggest = salaries[<span class="o">0</span>]
+<span class="k">for</span> s <span class="k">in</span> salaries:
+    <span class="k">if</span> s &gt; biggest:
+        biggest = s
+<span class="k">print</span>(biggest)
+<span class="k">print</span>(<span class="k">max</span>(salaries))     <span class="c"># the short way</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">91000
+91000</div>
+</article>
+<h2 class="cat" id="py-functions">Functions</h2>
+<article class="e"><h3>def and calling it</h3>
+<div class="why"><span class="lbl">Why it exists</span><p>The cure for copy and paste. Write the logic once, give it a name, and every fix you make afterwards lands everywhere it is used.</p></div>
+<div class="what"><span class="lbl">In short</span><p>def writes the function down. Nothing happens until you call it by name with brackets, and you can call it as often as you like.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">def</span> greet():
+    <span class="k">print</span>("Welcome to TAP Academy")
+
+greet()
+greet()</code></pre>
+<div class="lbl mt">Output</div><div class="out">Welcome to TAP Academy
+Welcome to TAP Academy</div>
+</article>
+<article class="e"><h3>Parameters and arguments</h3>
+<div class="what"><span class="lbl">In short</span><p>The name in the def line is the parameter. The value you hand over when you call it is the argument.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">def</span> greet(name):          <span class="c"># name is the parameter</span>
+    <span class="k">print</span>("Welcome,", name)
+
+greet("Priya")            <span class="c"># "Priya" is the argument</span>
+greet("Arun")</code></pre>
+<div class="lbl mt">Output</div><div class="out">Welcome, Priya
+Welcome, Arun</div>
+</article>
+<article class="e"><h3>More than one parameter</h3>
+<div class="what"><span class="lbl">In short</span><p>Comma separated, and by default they are matched by position, so the order you pass them in is the order they are read.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">def</span> pay(name, salary):
+    <span class="k">print</span>(name, "earns", salary)
+
+pay("Kavita", <span class="o">48000</span>)
+pay(<span class="o">48000</span>, "Kavita")       <span class="c"># same call, wrong order, nonsense result</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">Kavita earns 48000
+48000 earns Kavita</div>
+</article>
+<article class="e"><h3>return</h3>
+<div class="what"><span class="lbl">In short</span><p>Hands a value back to whoever called it, so you can store it or use it in a bigger sum. print() only shows something; return gives it to you.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">def</span> add(a, b):
+    <span class="k">return</span> a + b
+
+answer = add(<span class="o">10</span>, <span class="o">20</span>)
+<span class="k">print</span>(answer)
+<span class="k">print</span>(add(<span class="o">1</span>, <span class="o">2</span>) * <span class="o">10</span>)      <span class="c"># usable in an expression</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">30
+30</div>
+</article>
+<article class="e"><h3>print inside a function is not the same as return</h3>
+<div class="what"><span class="lbl">In short</span><p>A function that prints gives you None. You cannot do arithmetic with it.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">def</span> shows(a, b):
+    <span class="k">print</span>(a + b)
+
+<span class="k">def</span> gives(a, b):
+    <span class="k">return</span> a + b
+
+x = shows(<span class="o">2</span>, <span class="o">3</span>)
+<span class="k">print</span>("shows gave back:", x)
+y = gives(<span class="o">2</span>, <span class="o">3</span>)
+<span class="k">print</span>("gives gave back:", y)</code></pre>
+<div class="lbl mt">Output</div><div class="out">5
+shows gave back: None
+gives gave back: 5</div>
+</article>
+<article class="e"><h3>return ends the function</h3>
+<div class="what"><span class="lbl">In short</span><p>Nothing after a return runs. That makes it useful for stepping out early.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">def</span> band(salary):
+    <span class="k">if</span> salary &gt;= <span class="o">100000</span>:
+        <span class="k">return</span> "A"
+    <span class="k">if</span> salary &gt;= <span class="o">60000</span>:
+        <span class="k">return</span> "B"
+    <span class="k">return</span> "C"
+
+<span class="k">print</span>(band(<span class="o">150000</span>), band(<span class="o">70000</span>), band(<span class="o">30000</span>))</code></pre>
+<div class="lbl mt">Output</div><div class="out">A B C</div>
+</article>
+<article class="e"><h3>Returning more than one value</h3>
+<div class="what"><span class="lbl">In short</span><p>Separate them with commas. What comes back is a tuple, and you can unpack it into separate names.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">def</span> stats(nums):
+    <span class="k">return</span> <span class="k">min</span>(nums), <span class="k">max</span>(nums), <span class="k">sum</span>(nums) / <span class="k">len</span>(nums)
+
+lo, hi, avg = stats([<span class="o">50000</span>, <span class="o">62000</span>, <span class="o">48000</span>, <span class="o">91000</span>])
+<span class="k">print</span>(lo, hi, avg)
+<span class="k">print</span>(stats([<span class="o">1</span>, <span class="o">2</span>, <span class="o">3</span>]))        <span class="c"># as one tuple</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">48000 91000 62750.0
+(1, 3, 2.0)</div>
+</article>
+<article class="e"><h3>Default parameter</h3>
+<div class="what"><span class="lbl">In short</span><p>Give the parameter a value in the def line and the caller can leave it out. Any parameter with a default must come after the ones without.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">def</span> pay(name, salary=<span class="o">50000</span>):
+    <span class="k">print</span>(name, salary)
+
+pay("Priya")                <span class="c"># default used</span>
+pay("Priya", <span class="o">90000</span>)         <span class="c"># default overridden</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">Priya 50000
+Priya 90000</div>
+</article>
+<article class="e"><h3>Naming the arguments when you call</h3>
+<div class="what"><span class="lbl">In short</span><p>Pass them as name=value and the order stops mattering. This is how you will call almost every pandas function.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">def</span> emp(name, dept, city):
+    <span class="k">print</span>(name, "|", dept, "|", city)
+
+emp("Arun", "Tech", "Chennai")
+emp(city="Chennai", name="Arun", dept="Tech")      <span class="c"># same result</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">Arun | Tech | Chennai
+Arun | Tech | Chennai</div>
+</article>
+<article class="e"><h3>A function that calls another</h3>
+<div class="what"><span class="lbl">In short</span><p>Normal and good. Small functions that do one thing each, stacked up.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">def</span> is_senior(salary):
+    <span class="k">return</span> salary &gt; <span class="o">80000</span>
+
+<span class="k">def</span> label(name, salary):
+    <span class="k">if</span> is_senior(salary):
+        <span class="k">return</span> name + " (senior)"
+    <span class="k">return</span> name
+
+<span class="k">print</span>(label("Arun", <span class="o">91000</span>))
+<span class="k">print</span>(label("Kavita", <span class="o">48000</span>))</code></pre>
+<div class="lbl mt">Output</div><div class="out">Arun (senior)
+Kavita</div>
+</article>
+<article class="e"><h3>Local variables</h3>
+<div class="what"><span class="lbl">In short</span><p>A name created inside a function exists only while that function runs. Outside it, Python has never heard of it.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">def</span> calc():
+    inside = <span class="o">99</span>
+    <span class="k">print</span>("inside the function:", inside)
+
+calc()
+<span class="k">print</span>(inside)</code></pre>
+<div class="lbl mt">Output</div><div class="out">inside the function: 99
+NameError: name 'inside' is not defined</div>
+</article>
+<article class="e"><h3>Reading a variable from outside</h3>
+<div class="what"><span class="lbl">In short</span><p>A function can read a name defined outside it. Assigning to that name inside the function makes a new local one instead, and the outer value is left alone.</p></div>
+<div class="lbl mt">Code</div><pre><code>rate = <span class="o">0.10</span>                  <span class="c"># defined outside</span>
+
+<span class="k">def</span> bonus(salary):
+    <span class="k">return</span> salary * rate     <span class="c"># read from outside, fine</span>
+
+<span class="k">print</span>(bonus(<span class="o">50000</span>))
+
+<span class="k">def</span> reset():
+    rate = <span class="o">0.50</span>              <span class="c"># makes a NEW local rate</span>
+    <span class="k">print</span>("inside:", rate)
+
+reset()
+<span class="k">print</span>("outside is untouched:", rate)</code></pre>
+<div class="lbl mt">Output</div><div class="out">5000.0
+inside: 0.5
+outside is untouched: 0.1</div>
+</article>
+<h2 class="cat" id="py-strings">Strings</h2>
+<article class="e"><h3>len()</h3>
+<div class="what"><span class="lbl">In short</span><p>How many characters, spaces included.</p></div>
+<div class="lbl mt">Code</div><pre><code>name = "TAP Academy"
+<span class="k">print</span>(<span class="k">len</span>(name))
+<span class="k">print</span>(<span class="k">len</span>(""))</code></pre>
+<div class="lbl mt">Output</div><div class="out">11
+0</div>
+</article>
+<article class="e"><h3>Indexing</h3>
+<div class="what"><span class="lbl">In short</span><p>Square brackets pick one character. Counting starts at 0, so the last one is at len - 1.</p></div>
+<div class="lbl mt">Code</div><pre><code>name = "Priya"
+<span class="k">print</span>(name[<span class="o">0</span>])
+<span class="k">print</span>(name[<span class="o">1</span>])
+<span class="k">print</span>(name[<span class="o">4</span>])
+<span class="k">print</span>(name[<span class="k">len</span>(name) - <span class="o">1</span>])</code></pre>
+<div class="lbl mt">Output</div><div class="out">P
+r
+a
+a</div>
+</article>
+<article class="e"><h3>Negative indexing</h3>
+<div class="what"><span class="lbl">In short</span><p>Counting from the right instead, starting at -1. Much easier than working out the length first.</p></div>
+<div class="lbl mt">Code</div><pre><code>name = "Priya"
+<span class="k">print</span>(name[-<span class="o">1</span>])
+<span class="k">print</span>(name[-<span class="o">2</span>])
+<span class="k">print</span>(name[-<span class="o">5</span>])</code></pre>
+<div class="lbl mt">Output</div><div class="out">a
+y
+P</div>
+</article>
+<article class="e"><h3>Index out of range</h3>
+<div class="what"><span class="lbl">In short</span><p>Ask for a position that does not exist and Python stops. There is no silent blank.</p></div>
+<div class="lbl mt">Code</div><pre><code>name = "Priya"
+<span class="k">print</span>(name[<span class="o">5</span>])</code></pre>
+<div class="lbl mt">Output</div><div class="out">IndexError: string index out of range</div>
+</article>
+<article class="e"><h3>Slicing</h3>
+<div class="why"><span class="lbl">Why it exists</span><p>The same two-dots notation runs through the entire course. Lists slice like this, NumPy arrays slice like this, and df.iloc slices like this. Learn it once here.</p></div>
+<div class="what"><span class="lbl">In short</span><p>name[start:stop] gives you everything from start up to but not including stop. Leave a side out and Python assumes the beginning or the end.</p></div>
+<div class="lbl mt">Code</div><pre><code>name = "TAP Academy"
+<span class="k">print</span>(name[<span class="o">0</span>:<span class="o">3</span>])
+<span class="k">print</span>(name[<span class="o">4</span>:<span class="o">11</span>])
+<span class="k">print</span>(name[:<span class="o">3</span>])         <span class="c"># from the start</span>
+<span class="k">print</span>(name[<span class="o">4</span>:])         <span class="c"># to the end</span>
+<span class="k">print</span>(name[:])          <span class="c"># the whole thing</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">TAP
+Academy
+TAP
+Academy
+TAP Academy</div>
+</article>
+<article class="e"><h3>Slicing with a step</h3>
+<div class="what"><span class="lbl">In short</span><p>A third number takes every nth character. A step of -1 reverses the string, which is the standard trick.</p></div>
+<div class="lbl mt">Code</div><pre><code>s = "ABCDEFGH"
+<span class="k">print</span>(s[<span class="o">0</span>:<span class="o">8</span>:<span class="o">2</span>])
+<span class="k">print</span>(s[::<span class="o">3</span>])
+<span class="k">print</span>(s[::-<span class="o">1</span>])          <span class="c"># reversed</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">ACEG
+ADG
+HGFEDCBA</div>
+</article>
+<article class="e"><h3>Strings cannot be changed</h3>
+<div class="what"><span class="lbl">In short</span><p>You cannot assign to one character. Every string method hands you back a new string and leaves the original exactly as it was.</p></div>
+<div class="lbl mt">Code</div><pre><code>name = "priya"
+name[<span class="o">0</span>] = "P"</code></pre>
+<div class="lbl mt">Output</div><div class="out">TypeError: 'str' object does not support item assignment</div>
+</article>
+<article class="e"><h3>So reassign instead</h3>
+<div class="what"><span class="lbl">In short</span><p>Catch what the method gives back. If you do not store it, nothing appears to happen.</p></div>
+<div class="lbl mt">Code</div><pre><code>name = "priya"
+name.upper()                 <span class="c"># result thrown away</span>
+<span class="k">print</span>(name)
+
+name = name.upper()          <span class="c"># result kept</span>
+<span class="k">print</span>(name)</code></pre>
+<div class="lbl mt">Output</div><div class="out">priya
+PRIYA</div>
+</article>
+<article class="e"><h3>Joining and repeating</h3>
+<div class="what"><span class="lbl">In short</span><p>Plus glues two strings together. Star repeats one. Plus will not mix text and numbers.</p></div>
+<div class="lbl mt">Code</div><pre><code>first = "Priya"
+last = "Nair"
+<span class="k">print</span>(first + " " + last)
+<span class="k">print</span>("-" * <span class="o">20</span>)
+<span class="k">print</span>("Total: " + <span class="k">str</span>(<span class="o">50000</span>))      <span class="c"># str() needed</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">Priya Nair
+--------------------
+Total: 50000</div>
+</article>
+<article class="e"><h3>upper, lower, title, capitalize</h3>
+<div class="what"><span class="lbl">In short</span><p>Case changes. Lowercasing both sides is how you compare text safely.</p></div>
+<div class="lbl mt">Code</div><pre><code>s = "data ANALYTICS course"
+<span class="k">print</span>(s.upper())
+<span class="k">print</span>(s.lower())
+<span class="k">print</span>(s.title())
+<span class="k">print</span>(s.capitalize())
+<span class="k">print</span>("TECH".lower() == "tech")</code></pre>
+<div class="lbl mt">Output</div><div class="out">DATA ANALYTICS COURSE
+data analytics course
+Data Analytics Course
+Data analytics course
+True</div>
+</article>
+<article class="e"><h3>strip, lstrip, rstrip</h3>
+<div class="what"><span class="lbl">In short</span><p>Removes whitespace from the ends, not the middle. The first thing you do to anything typed by a human.</p></div>
+<div class="lbl mt">Code</div><pre><code>s = "   Chennai   "
+<span class="k">print</span>("[" + s + "]")
+<span class="k">print</span>("[" + s.strip() + "]")
+<span class="k">print</span>("[" + s.lstrip() + "]")
+<span class="k">print</span>("[" + s.rstrip() + "]")
+<span class="k">print</span>("[" + "xxChennaixx".strip("x") + "]")     <span class="c"># strip any character</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">[   Chennai   ]
+[Chennai]
+[Chennai   ]
+[   Chennai]
+[Chennai]</div>
+</article>
+<article class="e"><h3>replace</h3>
+<div class="what"><span class="lbl">In short</span><p>Swaps every occurrence. Give it a third number to limit how many.</p></div>
+<div class="lbl mt">Code</div><pre><code>s = "Sales,Tech,Sales,HR"
+<span class="k">print</span>(s.replace("Sales", "Revenue"))
+<span class="k">print</span>(s.replace("Sales", "Revenue", <span class="o">1</span>))
+<span class="k">print</span>(s.replace(",", " | "))</code></pre>
+<div class="lbl mt">Output</div><div class="out">Revenue,Tech,Revenue,HR
+Revenue,Tech,Sales,HR
+Sales | Tech | Sales | HR</div>
+</article>
+<article class="e"><h3>split</h3>
+<div class="why"><span class="lbl">Why it exists</span><p>This is what reading a CSV is underneath. One line of a file, split on the comma, is one row of your table.</p></div>
+<div class="what"><span class="lbl">In short</span><p>Cuts a string into a list. No argument splits on whitespace; give it a character and it splits on that.</p></div>
+<div class="lbl mt">Code</div><pre><code>s = "Priya,Tech,Chennai"
+<span class="k">print</span>(s.split(","))
+<span class="k">print</span>("one two three".split())
+parts = s.split(",")
+<span class="k">print</span>(parts[<span class="o">1</span>])</code></pre>
+<div class="lbl mt">Output</div><div class="out">['Priya', 'Tech', 'Chennai']
+['one', 'two', 'three']
+Tech</div>
+</article>
+<article class="e"><h3>join</h3>
+<div class="what"><span class="lbl">In short</span><p>The opposite of split. The string you call it on is the glue that goes between the items.</p></div>
+<div class="lbl mt">Code</div><pre><code>parts = ["Priya", "Tech", "Chennai"]
+<span class="k">print</span>(",".join(parts))
+<span class="k">print</span>(" | ".join(parts))
+<span class="k">print</span>("".join(["a", "b", "c"]))</code></pre>
+<div class="lbl mt">Output</div><div class="out">Priya,Tech,Chennai
+Priya | Tech | Chennai
+abc</div>
+</article>
+<article class="e"><h3>find and index</h3>
+<div class="what"><span class="lbl">In short</span><p>Both give the position of the first match. find returns -1 when there is nothing; index stops the program instead.</p></div>
+<div class="lbl mt">Code</div><pre><code>s = "data analytics"
+<span class="k">print</span>(s.find("analytics"))
+<span class="k">print</span>(s.find("python"))         <span class="c"># -1, no error</span>
+<span class="k">print</span>(s.index("analytics"))</code></pre>
+<div class="lbl mt">Output</div><div class="out">5
+-1
+5</div>
+</article>
+<article class="e"><h3>count</h3>
+<div class="what"><span class="lbl">In short</span><p>How many times something appears, without overlaps.</p></div>
+<div class="lbl mt">Code</div><pre><code>s = "Sales,Tech,Sales,HR,Sales"
+<span class="k">print</span>(s.count("Sales"))
+<span class="k">print</span>(s.count(","))
+<span class="k">print</span>(s.count("z"))</code></pre>
+<div class="lbl mt">Output</div><div class="out">3
+4
+0</div>
+</article>
+<article class="e"><h3>startswith and endswith</h3>
+<div class="what"><span class="lbl">In short</span><p>True or False, no position. The usual way to spot a file type or a prefix.</p></div>
+<div class="lbl mt">Code</div><pre><code>f = "employees.csv"
+<span class="k">print</span>(f.endswith(".csv"))
+<span class="k">print</span>(f.endswith(".xlsx"))
+<span class="k">print</span>(f.startswith("emp"))</code></pre>
+<div class="lbl mt">Output</div><div class="out">True
+False
+True</div>
+</article>
+<article class="e"><h3>in on a string</h3>
+<div class="what"><span class="lbl">In short</span><p>Asks whether a smaller piece of text sits anywhere inside a bigger one.</p></div>
+<div class="lbl mt">Code</div><pre><code>s = "Priya Nair"
+<span class="k">print</span>("Nair" <span class="k">in</span> s)
+<span class="k">print</span>("nair" <span class="k">in</span> s)            <span class="c"># case matters</span>
+<span class="k">print</span>("nair" <span class="k">in</span> s.lower())</code></pre>
+<div class="lbl mt">Output</div><div class="out">True
+False
+True</div>
+</article>
+<article class="e"><h3>isdigit, isalpha, isspace</h3>
+<div class="what"><span class="lbl">In short</span><p>Checks what a string is made of. isdigit is how you tell whether something typed in can safely become a number.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">print</span>("1004".isdigit())
+<span class="k">print</span>("10.5".isdigit())       <span class="c"># the dot is not a digit</span>
+<span class="k">print</span>("Priya".isalpha())
+<span class="k">print</span>("   ".isspace())</code></pre>
+<div class="lbl mt">Output</div><div class="out">True
+False
+True
+True</div>
+</article>
+<article class="e"><h3>Looping over a string</h3>
+<div class="what"><span class="lbl">In short</span><p>Counting the vowels, character by character.</p></div>
+<div class="lbl mt">Code</div><pre><code>name = "Data Analytics"
+vowels = <span class="o">0</span>
+<span class="k">for</span> ch <span class="k">in</span> name.lower():
+    <span class="k">if</span> ch <span class="k">in</span> "aeiou":
+        vowels += <span class="o">1</span>
+<span class="k">print</span>(vowels, "vowels")</code></pre>
+<div class="lbl mt">Output</div><div class="out">5 vowels</div>
+</article>
+<h2 class="cat" id="py-lists">Lists</h2>
+<article class="e"><h3>Making a list</h3>
+<div class="why"><span class="lbl">Why it exists</span><p>The container the course leans on hardest. It is ordered, you can change it, and it accepts duplicates, which is exactly the shape of a column of data.</p></div>
+<div class="what"><span class="lbl">In short</span><p>Square brackets, comma separated. It can hold anything, including a mix of types and other lists.</p></div>
+<div class="lbl mt">Code</div><pre><code>depts = ["Sales", "Tech", "HR"]
+salaries = [<span class="o">50000</span>, <span class="o">62000</span>, <span class="o">48000</span>]
+mixed = ["Priya", <span class="o">50000</span>, <span class="k">True</span>, <span class="k">None</span>]
+empty = []
+<span class="k">print</span>(depts)
+<span class="k">print</span>(mixed)
+<span class="k">print</span>(<span class="k">len</span>(empty))</code></pre>
+<div class="lbl mt">Output</div><div class="out">['Sales', 'Tech', 'HR']
+['Priya', 50000, True, None]
+0</div>
+</article>
+<article class="e"><h3>Indexing and slicing</h3>
+<div class="what"><span class="lbl">In short</span><p>Exactly the same notation as strings, including negatives and steps.</p></div>
+<div class="lbl mt">Code</div><pre><code>s = [<span class="o">50000</span>, <span class="o">62000</span>, <span class="o">48000</span>, <span class="o">91000</span>, <span class="o">120000</span>]
+<span class="k">print</span>(s[<span class="o">0</span>])
+<span class="k">print</span>(s[-<span class="o">1</span>])
+<span class="k">print</span>(s[<span class="o">1</span>:<span class="o">4</span>])
+<span class="k">print</span>(s[:<span class="o">2</span>])
+<span class="k">print</span>(s[::-<span class="o">1</span>])</code></pre>
+<div class="lbl mt">Output</div><div class="out">50000
+120000
+[62000, 48000, 91000]
+[50000, 62000]
+[120000, 91000, 48000, 62000, 50000]</div>
+</article>
+<article class="e"><h3>Lists can be changed</h3>
+<div class="what"><span class="lbl">In short</span><p>This is the big difference from a string or a tuple. Assign straight into a position.</p></div>
+<div class="lbl mt">Code</div><pre><code>depts = ["Sales", "Tech", "HR"]
+depts[<span class="o">2</span>] = "Legal"
+<span class="k">print</span>(depts)
+depts[<span class="o">0</span>:<span class="o">2</span>] = ["Marketing", "Engineering"]
+<span class="k">print</span>(depts)</code></pre>
+<div class="lbl mt">Output</div><div class="out">['Sales', 'Tech', 'Legal']
+['Marketing', 'Engineering', 'Legal']</div>
+</article>
+<article class="e"><h3>append</h3>
+<div class="what"><span class="lbl">In short</span><p>Adds one item at the end. The list is changed in place and append itself returns nothing.</p></div>
+<div class="lbl mt">Code</div><pre><code>depts = ["Sales", "Tech"]
+depts.append("HR")
+<span class="k">print</span>(depts)
+<span class="k">print</span>(depts.append("Legal"))     <span class="c"># returns None, the list is still changed</span>
+<span class="k">print</span>(depts)</code></pre>
+<div class="lbl mt">Output</div><div class="out">['Sales', 'Tech', 'HR']
+None
+['Sales', 'Tech', 'HR', 'Legal']</div>
+</article>
+<article class="e"><h3>insert</h3>
+<div class="what"><span class="lbl">In short</span><p>Puts an item at a position and shuffles everything after it along.</p></div>
+<div class="lbl mt">Code</div><pre><code>depts = ["Sales", "Tech", "HR"]
+depts.insert(<span class="o">1</span>, "Marketing")
+<span class="k">print</span>(depts)
+depts.insert(<span class="o">0</span>, "Legal")
+<span class="k">print</span>(depts)</code></pre>
+<div class="lbl mt">Output</div><div class="out">['Sales', 'Marketing', 'Tech', 'HR']
+['Legal', 'Sales', 'Marketing', 'Tech', 'HR']</div>
+</article>
+<article class="e"><h3>extend, and why append is not the same</h3>
+<div class="what"><span class="lbl">In short</span><p>extend adds every item of the other list. append would add the whole list as one single item.</p></div>
+<div class="lbl mt">Code</div><pre><code>a = ["Sales", "Tech"]
+a.extend(["HR", "Legal"])
+<span class="k">print</span>(a)
+
+b = ["Sales", "Tech"]
+b.append(["HR", "Legal"])
+<span class="k">print</span>(b)
+<span class="k">print</span>(<span class="k">len</span>(a), <span class="k">len</span>(b))</code></pre>
+<div class="lbl mt">Output</div><div class="out">['Sales', 'Tech', 'HR', 'Legal']
+['Sales', 'Tech', ['HR', 'Legal']]
+4 3</div>
+</article>
+<article class="e"><h3>remove</h3>
+<div class="what"><span class="lbl">In short</span><p>Deletes by value, the first match only. It stops the program if the value is not there.</p></div>
+<div class="lbl mt">Code</div><pre><code>depts = ["Sales", "Tech", "HR", "Tech"]
+depts.remove("Tech")
+<span class="k">print</span>(depts)</code></pre>
+<div class="lbl mt">Output</div><div class="out">['Sales', 'HR', 'Tech']</div>
+</article>
+<article class="e"><h3>pop</h3>
+<div class="what"><span class="lbl">In short</span><p>Deletes by position and hands the item back. With no number it takes the last one.</p></div>
+<div class="lbl mt">Code</div><pre><code>depts = ["Sales", "Tech", "HR"]
+gone = depts.pop()
+<span class="k">print</span>(gone, depts)
+gone = depts.pop(<span class="o">0</span>)
+<span class="k">print</span>(gone, depts)</code></pre>
+<div class="lbl mt">Output</div><div class="out">HR ['Sales', 'Tech']
+Sales ['Tech']</div>
+</article>
+<article class="e"><h3>del and clear</h3>
+<div class="what"><span class="lbl">In short</span><p>del removes by position or wipes the whole name. clear empties the list but keeps it.</p></div>
+<div class="lbl mt">Code</div><pre><code>depts = ["Sales", "Tech", "HR", "Legal"]
+<span class="k">del</span> depts[<span class="o">1</span>]
+<span class="k">print</span>(depts)
+<span class="k">del</span> depts[<span class="o">0</span>:<span class="o">2</span>]
+<span class="k">print</span>(depts)
+depts.clear()
+<span class="k">print</span>(depts)</code></pre>
+<div class="lbl mt">Output</div><div class="out">['Sales', 'HR', 'Legal']
+['Legal']
+[]</div>
+</article>
+<article class="e"><h3>sort</h3>
+<div class="what"><span class="lbl">In short</span><p>Sorts the list itself and returns nothing. reverse=True for descending. Text sorts alphabetically.</p></div>
+<div class="lbl mt">Code</div><pre><code>s = [<span class="o">62000</span>, <span class="o">50000</span>, <span class="o">91000</span>, <span class="o">48000</span>]
+s.sort()
+<span class="k">print</span>(s)
+s.sort(reverse=<span class="k">True</span>)
+<span class="k">print</span>(s)
+
+d = ["Tech", "HR", "Sales"]
+d.sort()
+<span class="k">print</span>(d)</code></pre>
+<div class="lbl mt">Output</div><div class="out">[48000, 50000, 62000, 91000]
+[91000, 62000, 50000, 48000]
+['HR', 'Sales', 'Tech']</div>
+</article>
+<article class="e"><h3>sorted() against .sort()</h3>
+<div class="what"><span class="lbl">In short</span><p>sorted() leaves the original alone and gives you a new list. .sort() changes the original and gives you None. Mixing them up is the classic mistake.</p></div>
+<div class="lbl mt">Code</div><pre><code>s = [<span class="o">62000</span>, <span class="o">50000</span>, <span class="o">91000</span>]
+new = <span class="k">sorted</span>(s)
+<span class="k">print</span>("original:", s)
+<span class="k">print</span>("new:", new)
+
+nothing = s.sort()
+<span class="k">print</span>("after .sort():", s)
+<span class="k">print</span>("it returned:", nothing)</code></pre>
+<div class="lbl mt">Output</div><div class="out">original: [62000, 50000, 91000]
+new: [50000, 62000, 91000]
+after .sort(): [50000, 62000, 91000]
+it returned: None</div>
+</article>
+<article class="e"><h3>reverse</h3>
+<div class="what"><span class="lbl">In short</span><p>Flips the order without sorting. Slicing with [::-1] does the same thing but gives you a new list.</p></div>
+<div class="lbl mt">Code</div><pre><code>s = [<span class="o">1</span>, <span class="o">2</span>, <span class="o">3</span>, <span class="o">4</span>]
+s.reverse()
+<span class="k">print</span>(s)
+<span class="k">print</span>(s[::-<span class="o">1</span>])</code></pre>
+<div class="lbl mt">Output</div><div class="out">[4, 3, 2, 1]
+[1, 2, 3, 4]</div>
+</article>
+<article class="e"><h3>count and index</h3>
+<div class="what"><span class="lbl">In short</span><p>How many times a value appears, and where the first one is.</p></div>
+<div class="lbl mt">Code</div><pre><code>d = ["Sales", "Tech", "Sales", "HR"]
+<span class="k">print</span>(d.count("Sales"))
+<span class="k">print</span>(d.index("Sales"))
+<span class="k">print</span>(d.index("Sales", <span class="o">1</span>))     <span class="c"># start looking from position 1</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">2
+0
+2</div>
+</article>
+<article class="e"><h3>len, min, max, sum</h3>
+<div class="what"><span class="lbl">In short</span><p>Four built-ins that do the obvious thing. sum only works on numbers; min and max also work on text.</p></div>
+<div class="lbl mt">Code</div><pre><code>s = [<span class="o">50000</span>, <span class="o">62000</span>, <span class="o">48000</span>, <span class="o">91000</span>]
+<span class="k">print</span>(<span class="k">len</span>(s), <span class="k">min</span>(s), <span class="k">max</span>(s), <span class="k">sum</span>(s))
+<span class="k">print</span>(<span class="k">sum</span>(s) / <span class="k">len</span>(s))
+<span class="k">print</span>(<span class="k">min</span>(["Tech", "HR", "Sales"]))</code></pre>
+<div class="lbl mt">Output</div><div class="out">4 48000 91000 251000
+62750.0
+HR</div>
+</article>
+<article class="e"><h3>Copying a list, and the trap</h3>
+<div class="why"><span class="lbl">Why it exists</span><p>The first bug that makes no sense when you hit it. The same trap waits for you in pandas, which is why you keep seeing .copy() in example code.</p></div>
+<div class="what"><span class="lbl">In short</span><p>Assigning with = gives you a second name for the same list, so changing one changes both. copy() or [:] makes a real second list.</p></div>
+<div class="lbl mt">Code</div><pre><code>a = ["Sales", "Tech"]
+b = a                <span class="c"># NOT a copy</span>
+b.append("HR")
+<span class="k">print</span>("a is", a)     <span class="c"># a changed too</span>
+
+c = ["Sales", "Tech"]
+d = c.copy()         <span class="c"># a real copy</span>
+d.append("HR")
+<span class="k">print</span>("c is", c)
+<span class="k">print</span>("d is", d)</code></pre>
+<div class="lbl mt">Output</div><div class="out">a is ['Sales', 'Tech', 'HR']
+c is ['Sales', 'Tech']
+d is ['Sales', 'Tech', 'HR']</div>
+</article>
+<article class="e"><h3>Lists inside lists</h3>
+<div class="what"><span class="lbl">In short</span><p>Two sets of brackets to reach in: the row first, then the item.</p></div>
+<div class="lbl mt">Code</div><pre><code>rows = [["Priya", "Tech", <span class="o">62000</span>],
+        ["Arun", "Sales", <span class="o">50000</span>],
+        ["Kavita", "HR", <span class="o">48000</span>]]
+<span class="k">print</span>(rows[<span class="o">0</span>])
+<span class="k">print</span>(rows[<span class="o">0</span>][<span class="o">0</span>])
+<span class="k">print</span>(rows[<span class="o">2</span>][<span class="o">2</span>])
+<span class="k">for</span> r <span class="k">in</span> rows:
+    <span class="k">print</span>(r[<span class="o">0</span>], "earns", r[<span class="o">2</span>])</code></pre>
+<div class="lbl mt">Output</div><div class="out">['Priya', 'Tech', 62000]
+Priya
+48000
+Priya earns 62000
+Arun earns 50000
+Kavita earns 48000</div>
+</article>
+<article class="e"><h3>in on a list</h3>
+<div class="what"><span class="lbl">In short</span><p>Membership, and it is the readable way to avoid a chain of comparisons.</p></div>
+<div class="lbl mt">Code</div><pre><code>depts = ["Sales", "Tech", "HR"]
+<span class="k">print</span>("Tech" <span class="k">in</span> depts)
+<span class="k">print</span>("Legal" <span class="k">in</span> depts)
+<span class="k">if</span> "HR" <span class="k">in</span> depts:
+    <span class="k">print</span>("HR is covered")</code></pre>
+<div class="lbl mt">Output</div><div class="out">True
+False
+HR is covered</div>
+</article>
+<article class="e"><h3>List comprehension</h3>
+<div class="why"><span class="lbl">Why it exists</span><p>Shorter is not the point. Once you can read this line, the way pandas applies an operation to a whole column stops looking like magic.</p></div>
+<div class="what"><span class="lbl">In short</span><p>A loop and a new list in one line. Read it as "give me expression for every item in the list".</p></div>
+<div class="lbl mt">Code</div><pre><code>s = [<span class="o">50000</span>, <span class="o">62000</span>, <span class="o">48000</span>]
+
+hiked = []
+<span class="k">for</span> x <span class="k">in</span> s:                    <span class="c"># the long way</span>
+    hiked.append(x * <span class="o">1.10</span>)
+<span class="k">print</span>(hiked)
+
+hiked = [x * <span class="o">1.10</span> <span class="k">for</span> x <span class="k">in</span> s]  <span class="c"># the same thing</span>
+<span class="k">print</span>(hiked)</code></pre>
+<div class="lbl mt">Output</div><div class="out">[55000.00000000001, 68200.0, 52800.00000000001]
+[55000.00000000001, 68200.0, 52800.00000000001]</div>
+</article>
+<article class="e"><h3>Comprehension with a condition</h3>
+<div class="what"><span class="lbl">In short</span><p>Put an if at the end and only the items that pass it get through, so the new list can be shorter than the old one.</p></div>
+<div class="lbl mt">Code</div><pre><code>s = [<span class="o">50000</span>, <span class="o">62000</span>, <span class="o">48000</span>, <span class="o">91000</span>, <span class="o">120000</span>]
+big = [x <span class="k">for</span> x <span class="k">in</span> s <span class="k">if</span> x &gt; <span class="o">60000</span>]
+<span class="k">print</span>(big)
+
+names = ["priya", "arun", "kavita"]
+<span class="k">print</span>([n.title() <span class="k">for</span> n <span class="k">in</span> names])
+<span class="k">print</span>([<span class="k">len</span>(n) <span class="k">for</span> n <span class="k">in</span> names])</code></pre>
+<div class="lbl mt">Output</div><div class="out">[62000, 91000, 120000]
+['Priya', 'Arun', 'Kavita']
+[5, 4, 6]</div>
+</article>
+<h2 class="cat" id="py-tuples">Tuples</h2>
+<article class="e"><h3>Making a tuple</h3>
+<div class="why"><span class="lbl">Why it exists</span><p>Use it when the data should not move: a fixed pair of coordinates, a row that has already been read, a set of settings. "Cannot be changed" is a feature, not a limitation.</p></div>
+<div class="what"><span class="lbl">In short</span><p>Round brackets instead of square. Ordered like a list, but it cannot be changed after it is made.</p></div>
+<div class="lbl mt">Code</div><pre><code>emp = ("Priya", "Tech", <span class="o">62000</span>)
+<span class="k">print</span>(emp)
+<span class="k">print</span>(<span class="k">type</span>(emp))
+<span class="k">print</span>(<span class="k">len</span>(emp))
+<span class="k">print</span>(emp[<span class="o">0</span>], emp[-<span class="o">1</span>])</code></pre>
+<div class="lbl mt">Output</div><div class="out">('Priya', 'Tech', 62000)
+&lt;class 'tuple'&gt;
+3
+Priya 62000</div>
+</article>
+<article class="e"><h3>A tuple with one item needs the comma</h3>
+<div class="what"><span class="lbl">In short</span><p>Without the trailing comma the brackets are just brackets and you get a plain value.</p></div>
+<div class="lbl mt">Code</div><pre><code>not_a_tuple = ("Priya")
+real_tuple = ("Priya",)
+<span class="k">print</span>(<span class="k">type</span>(not_a_tuple))
+<span class="k">print</span>(<span class="k">type</span>(real_tuple))</code></pre>
+<div class="lbl mt">Output</div><div class="out">&lt;class 'str'&gt;
+&lt;class 'tuple'&gt;</div>
+</article>
+<article class="e"><h3>Tuples cannot be changed</h3>
+<div class="what"><span class="lbl">In short</span><p>No assignment into a position, and no append, insert, remove or sort either.</p></div>
+<div class="lbl mt">Code</div><pre><code>emp = ("Priya", "Tech", <span class="o">62000</span>)
+emp[<span class="o">2</span>] = <span class="o">70000</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">TypeError: 'tuple' object does not support item assignment</div>
+</article>
+<article class="e"><h3>Slicing a tuple</h3>
+<div class="what"><span class="lbl">In short</span><p>Reading works exactly as it does for lists. It is only writing that is blocked.</p></div>
+<div class="lbl mt">Code</div><pre><code>t = (<span class="o">10</span>, <span class="o">20</span>, <span class="o">30</span>, <span class="o">40</span>, <span class="o">50</span>)
+<span class="k">print</span>(t[<span class="o">1</span>:<span class="o">4</span>])
+<span class="k">print</span>(t[:<span class="o">2</span>])
+<span class="k">print</span>(t[::-<span class="o">1</span>])
+<span class="k">print</span>(<span class="o">20</span> <span class="k">in</span> t)</code></pre>
+<div class="lbl mt">Output</div><div class="out">(20, 30, 40)
+(10, 20)
+(50, 40, 30, 20, 10)
+True</div>
+</article>
+<article class="e"><h3>Unpacking</h3>
+<div class="what"><span class="lbl">In short</span><p>Give as many names on the left as there are items, and each one gets its own. This is how a function returning several values is read.</p></div>
+<div class="lbl mt">Code</div><pre><code>emp = ("Priya", "Tech", <span class="o">62000</span>)
+name, dept, salary = emp
+<span class="k">print</span>(name)
+<span class="k">print</span>(dept)
+<span class="k">print</span>(salary)</code></pre>
+<div class="lbl mt">Output</div><div class="out">Priya
+Tech
+62000</div>
+</article>
+<article class="e"><h3>count and index</h3>
+<div class="what"><span class="lbl">In short</span><p>The only two methods a tuple has, because the rest would all change it.</p></div>
+<div class="lbl mt">Code</div><pre><code>t = ("Sales", "Tech", "Sales", "HR")
+<span class="k">print</span>(t.count("Sales"))
+<span class="k">print</span>(t.index("HR"))</code></pre>
+<div class="lbl mt">Output</div><div class="out">2
+3</div>
+</article>
+<article class="e"><h3>Converting between list and tuple</h3>
+<div class="what"><span class="lbl">In short</span><p>The usual move: turn it into a list, change it, turn it back.</p></div>
+<div class="lbl mt">Code</div><pre><code>t = ("Sales", "Tech")
+as_list = <span class="k">list</span>(t)
+as_list.append("HR")
+t = <span class="k">tuple</span>(as_list)
+<span class="k">print</span>(t)</code></pre>
+<div class="lbl mt">Output</div><div class="out">('Sales', 'Tech', 'HR')</div>
+</article>
+<h2 class="cat" id="py-sets">Sets</h2>
+<article class="e"><h3>Making a set</h3>
+<div class="why"><span class="lbl">Why it exists</span><p>Two jobs, and it is the best tool for both: getting rid of duplicates, and comparing two groups to see what they share. Duplicate handling in pandas rests on the same idea.</p></div>
+<div class="what"><span class="lbl">In short</span><p>Curly brackets. Duplicates vanish on their own and the order is not kept, so what you print may not match the order you typed.</p></div>
+<div class="lbl mt">Code</div><pre><code>depts = {"Sales", "Tech", "HR", "Sales", "Tech"}
+<span class="k">print</span>(<span class="k">len</span>(depts))
+<span class="k">print</span>(<span class="k">sorted</span>(depts))          <span class="c"># sorted, so the output is predictable</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">3
+['HR', 'Sales', 'Tech']</div>
+</article>
+<article class="e"><h3>An empty set is not {}</h3>
+<div class="what"><span class="lbl">In short</span><p>Empty curly brackets make a dictionary. You need set() for an empty set.</p></div>
+<div class="lbl mt">Code</div><pre><code>a = {}
+b = <span class="k">set</span>()
+<span class="k">print</span>(<span class="k">type</span>(a))
+<span class="k">print</span>(<span class="k">type</span>(b))</code></pre>
+<div class="lbl mt">Output</div><div class="out">&lt;class 'dict'&gt;
+&lt;class 'set'&gt;</div>
+</article>
+<article class="e"><h3>No indexing</h3>
+<div class="what"><span class="lbl">In short</span><p>A set has no positions, so there is nothing to ask for. Loop over it or convert it to a list first.</p></div>
+<div class="lbl mt">Code</div><pre><code>depts = {"Sales", "Tech", "HR"}
+<span class="k">print</span>(depts[<span class="o">0</span>])</code></pre>
+<div class="lbl mt">Output</div><div class="out">TypeError: 'set' object is not subscriptable</div>
+</article>
+<article class="e"><h3>add and update</h3>
+<div class="what"><span class="lbl">In short</span><p>add puts in one item, update puts in several. Adding something already there does nothing at all, and that is not an error.</p></div>
+<div class="lbl mt">Code</div><pre><code>depts = {"Sales", "Tech"}
+depts.add("HR")
+<span class="k">print</span>(<span class="k">sorted</span>(depts))
+depts.add("HR")               <span class="c"># already in, no change, no complaint</span>
+<span class="k">print</span>(<span class="k">sorted</span>(depts))
+depts.update(["Legal", "Marketing"])
+<span class="k">print</span>(<span class="k">sorted</span>(depts))</code></pre>
+<div class="lbl mt">Output</div><div class="out">['HR', 'Sales', 'Tech']
+['HR', 'Sales', 'Tech']
+['HR', 'Legal', 'Marketing', 'Sales', 'Tech']</div>
+</article>
+<article class="e"><h3>remove and discard</h3>
+<div class="what"><span class="lbl">In short</span><p>Both take an item out. remove stops the program if it was not there, discard does not. discard is usually what you want.</p></div>
+<div class="lbl mt">Code</div><pre><code>depts = {"Sales", "Tech", "HR"}
+depts.remove("Tech")
+<span class="k">print</span>(<span class="k">sorted</span>(depts))
+depts.discard("Legal")        <span class="c"># not there, stays quiet</span>
+<span class="k">print</span>(<span class="k">sorted</span>(depts))</code></pre>
+<div class="lbl mt">Output</div><div class="out">['HR', 'Sales']
+['HR', 'Sales']</div>
+</article>
+<article class="e"><h3>union</h3>
+<div class="what"><span class="lbl">In short</span><p>Everything from both, with nothing counted twice. The | symbol does the same thing.</p></div>
+<div class="lbl mt">Code</div><pre><code>a = {"Sales", "Tech"}
+b = {"Tech", "HR"}
+<span class="k">print</span>(<span class="k">sorted</span>(a.union(b)))
+<span class="k">print</span>(<span class="k">sorted</span>(a | b))</code></pre>
+<div class="lbl mt">Output</div><div class="out">['HR', 'Sales', 'Tech']
+['HR', 'Sales', 'Tech']</div>
+</article>
+<article class="e"><h3>intersection</h3>
+<div class="what"><span class="lbl">In short</span><p>Only what sits in both. The &amp; symbol is the short form.</p></div>
+<div class="lbl mt">Code</div><pre><code>a = {"Sales", "Tech", "HR"}
+b = {"Tech", "HR", "Legal"}
+<span class="k">print</span>(<span class="k">sorted</span>(a.intersection(b)))
+<span class="k">print</span>(<span class="k">sorted</span>(a &amp; b))</code></pre>
+<div class="lbl mt">Output</div><div class="out">['HR', 'Tech']
+['HR', 'Tech']</div>
+</article>
+<article class="e"><h3>difference</h3>
+<div class="what"><span class="lbl">In short</span><p>In the first one but not the second. The order you write them in changes the answer.</p></div>
+<div class="lbl mt">Code</div><pre><code>a = {"Sales", "Tech", "HR"}
+b = {"Tech", "Legal"}
+<span class="k">print</span>(<span class="k">sorted</span>(a.difference(b)))
+<span class="k">print</span>(<span class="k">sorted</span>(b.difference(a)))
+<span class="k">print</span>(<span class="k">sorted</span>(a - b))</code></pre>
+<div class="lbl mt">Output</div><div class="out">['HR', 'Sales']
+['Legal']
+['HR', 'Sales']</div>
+</article>
+<article class="e"><h3>symmetric_difference</h3>
+<div class="what"><span class="lbl">In short</span><p>In one or the other, but not in both. The opposite of intersection.</p></div>
+<div class="lbl mt">Code</div><pre><code>a = {"Sales", "Tech", "HR"}
+b = {"Tech", "Legal"}
+<span class="k">print</span>(<span class="k">sorted</span>(a.symmetric_difference(b)))
+<span class="k">print</span>(<span class="k">sorted</span>(a ^ b))</code></pre>
+<div class="lbl mt">Output</div><div class="out">['HR', 'Legal', 'Sales']
+['HR', 'Legal', 'Sales']</div>
+</article>
+<article class="e"><h3>issubset and issuperset</h3>
+<div class="what"><span class="lbl">In short</span><p>Is every item of one inside the other. True or False.</p></div>
+<div class="lbl mt">Code</div><pre><code>small = {"Tech"}
+big = {"Sales", "Tech", "HR"}
+<span class="k">print</span>(small.issubset(big))
+<span class="k">print</span>(big.issuperset(small))
+<span class="k">print</span>(big.issubset(small))</code></pre>
+<div class="lbl mt">Output</div><div class="out">True
+True
+False</div>
+</article>
+<article class="e"><h3>Removing duplicates from a list</h3>
+<div class="what"><span class="lbl">In short</span><p>The job you will actually use a set for. Note that the order is lost, so sort it if order matters.</p></div>
+<div class="lbl mt">Code</div><pre><code>cities = ["Chennai", "Pune", "Chennai", "Delhi", "Pune", "Chennai"]
+<span class="k">print</span>(<span class="k">len</span>(cities))
+unique = <span class="k">list</span>(<span class="k">set</span>(cities))
+<span class="k">print</span>(<span class="k">len</span>(unique))
+<span class="k">print</span>(<span class="k">sorted</span>(unique))</code></pre>
+<div class="lbl mt">Output</div><div class="out">6
+3
+['Chennai', 'Delhi', 'Pune']</div>
+</article>
+<h2 class="cat" id="py-dictionaries">Dictionaries</h2>
+<article class="e"><h3>Making a dictionary</h3>
+<div class="why"><span class="lbl">Why it exists</span><p>The shape data actually arrives in. Every API answer, every JSON file and every DataFrame you build by hand is a dictionary underneath.</p></div>
+<div class="what"><span class="lbl">In short</span><p>Curly brackets holding key: value pairs. You look things up by the key, not by a position, and the keys have to be unique.</p></div>
+<div class="lbl mt">Code</div><pre><code>emp = {"name": "Priya", "dept": "Tech", "salary": <span class="o">62000</span>}
+<span class="k">print</span>(emp)
+<span class="k">print</span>(emp["name"])
+<span class="k">print</span>(emp["salary"])
+<span class="k">print</span>(<span class="k">len</span>(emp))</code></pre>
+<div class="lbl mt">Output</div><div class="out">{'name': 'Priya', 'dept': 'Tech', 'salary': 62000}
+Priya
+62000
+3</div>
+</article>
+<article class="e"><h3>A missing key stops the program</h3>
+<div class="what"><span class="lbl">In short</span><p>Asking for a key that is not there is an error, not a blank.</p></div>
+<div class="lbl mt">Code</div><pre><code>emp = {"name": "Priya", "dept": "Tech"}
+<span class="k">print</span>(emp["city"])</code></pre>
+<div class="lbl mt">Output</div><div class="out">KeyError: 'city'</div>
+</article>
+<article class="e"><h3>get()</h3>
+<div class="what"><span class="lbl">In short</span><p>Looks up a key without the risk. Missing keys give None, or whatever second value you hand it.</p></div>
+<div class="lbl mt">Code</div><pre><code>emp = {"name": "Priya", "dept": "Tech"}
+<span class="k">print</span>(emp.get("city"))
+<span class="k">print</span>(emp.get("city", "not recorded"))
+<span class="k">print</span>(emp.get("name", "not recorded"))</code></pre>
+<div class="lbl mt">Output</div><div class="out">None
+not recorded
+Priya</div>
+</article>
+<article class="e"><h3>Adding and changing</h3>
+<div class="what"><span class="lbl">In short</span><p>Assign to a key. If it exists the value is replaced, if it does not the pair is added. Same syntax either way.</p></div>
+<div class="lbl mt">Code</div><pre><code>emp = {"name": "Priya"}
+emp["dept"] = "Tech"          <span class="c"># added</span>
+emp["name"] = "Priya Nair"    <span class="c"># changed</span>
+<span class="k">print</span>(emp)
+emp.update({"city": "Chennai", "salary": <span class="o">62000</span>})
+<span class="k">print</span>(emp)</code></pre>
+<div class="lbl mt">Output</div><div class="out">{'name': 'Priya Nair', 'dept': 'Tech'}
+{'name': 'Priya Nair', 'dept': 'Tech', 'city': 'Chennai', 'salary': 62000}</div>
+</article>
+<article class="e"><h3>pop and del</h3>
+<div class="what"><span class="lbl">In short</span><p>pop takes the pair out and hands the value back. del just removes it.</p></div>
+<div class="lbl mt">Code</div><pre><code>emp = {"name": "Priya", "dept": "Tech", "city": "Chennai"}
+gone = emp.pop("city")
+<span class="k">print</span>(gone)
+<span class="k">print</span>(emp)
+<span class="k">del</span> emp["dept"]
+<span class="k">print</span>(emp)</code></pre>
+<div class="lbl mt">Output</div><div class="out">Chennai
+{'name': 'Priya', 'dept': 'Tech'}
+{'name': 'Priya'}</div>
+</article>
+<article class="e"><h3>keys, values, items</h3>
+<div class="what"><span class="lbl">In short</span><p>Three views of the same dictionary. items() gives you each pair as a tuple, which is what you loop over.</p></div>
+<div class="lbl mt">Code</div><pre><code>emp = {"name": "Priya", "dept": "Tech", "salary": <span class="o">62000</span>}
+<span class="k">print</span>(<span class="k">list</span>(emp.keys()))
+<span class="k">print</span>(<span class="k">list</span>(emp.values()))
+<span class="k">print</span>(<span class="k">list</span>(emp.items()))</code></pre>
+<div class="lbl mt">Output</div><div class="out">['name', 'dept', 'salary']
+['Priya', 'Tech', 62000]
+[('name', 'Priya'), ('dept', 'Tech'), ('salary', 62000)]</div>
+</article>
+<article class="e"><h3>Looping over a dictionary</h3>
+<div class="what"><span class="lbl">In short</span><p>A plain loop walks the keys. items() unpacks into two names, which is nearly always what you want.</p></div>
+<div class="lbl mt">Code</div><pre><code>emp = {"name": "Priya", "dept": "Tech", "salary": <span class="o">62000</span>}
+<span class="k">for</span> k <span class="k">in</span> emp:
+    <span class="k">print</span>(k)
+<span class="k">print</span>("---")
+<span class="k">for</span> k, v <span class="k">in</span> emp.items():
+    <span class="k">print</span>(k, "-&gt;", v)</code></pre>
+<div class="lbl mt">Output</div><div class="out">name
+dept
+salary
+---
+name -&gt; Priya
+dept -&gt; Tech
+salary -&gt; 62000</div>
+</article>
+<article class="e"><h3>in checks the keys</h3>
+<div class="what"><span class="lbl">In short</span><p>Membership on a dictionary looks at keys, not values. Check values with .values().</p></div>
+<div class="lbl mt">Code</div><pre><code>emp = {"name": "Priya", "dept": "Tech"}
+<span class="k">print</span>("name" <span class="k">in</span> emp)
+<span class="k">print</span>("Priya" <span class="k">in</span> emp)             <span class="c"># a value, so False</span>
+<span class="k">print</span>("Priya" <span class="k">in</span> emp.values())</code></pre>
+<div class="lbl mt">Output</div><div class="out">True
+False
+True</div>
+</article>
+<article class="e"><h3>Dictionaries inside dictionaries</h3>
+<div class="what"><span class="lbl">In short</span><p>The usual way a record set is held: one key per record, and each value is a dictionary of its own.</p></div>
+<div class="lbl mt">Code</div><pre><code>staff = {
+    <span class="o">1001</span>: {"name": "Priya", "dept": "Tech"},
+    <span class="o">1002</span>: {"name": "Arun", "dept": "Sales"},
+}
+<span class="k">print</span>(staff[<span class="o">1001</span>])
+<span class="k">print</span>(staff[<span class="o">1001</span>]["name"])
+<span class="k">for</span> emp_id, row <span class="k">in</span> staff.items():
+    <span class="k">print</span>(emp_id, row["name"], row["dept"])</code></pre>
+<div class="lbl mt">Output</div><div class="out">{'name': 'Priya', 'dept': 'Tech'}
+Priya
+1001 Priya Tech
+1002 Arun Sales</div>
+</article>
+<article class="e"><h3>A dictionary of lists</h3>
+<div class="what"><span class="lbl">In short</span><p>Every key holds a whole column. Remember this shape, because it is exactly what you hand to pandas to make a DataFrame.</p></div>
+<div class="lbl mt">Code</div><pre><code>data = {
+    "name": ["Priya", "Arun", "Kavita"],
+    "dept": ["Tech", "Sales", "HR"],
+    "salary": [<span class="o">62000</span>, <span class="o">50000</span>, <span class="o">48000</span>],
+}
+<span class="k">print</span>(data["salary"])
+<span class="k">print</span>(<span class="k">sum</span>(data["salary"]) / <span class="k">len</span>(data["salary"]))
+<span class="k">for</span> i <span class="k">in</span> <span class="k">range</span>(<span class="k">len</span>(data["name"])):
+    <span class="k">print</span>(data["name"][i], data["dept"][i], data["salary"][i])</code></pre>
+<div class="lbl mt">Output</div><div class="out">[62000, 50000, 48000]
+53333.333333333336
+Priya Tech 62000
+Arun Sales 50000
+Kavita HR 48000</div>
+</article>
+<article class="e"><h3>Counting with a dictionary</h3>
+<div class="what"><span class="lbl">In short</span><p>Start empty, use get() with a default of 0, and add one. The pattern behind value_counts().</p></div>
+<div class="lbl mt">Code</div><pre><code>cities = ["Chennai", "Pune", "Chennai", "Delhi", "Pune", "Chennai"]
+counts = {}
+<span class="k">for</span> c <span class="k">in</span> cities:
+    counts[c] = counts.get(c, <span class="o">0</span>) + <span class="o">1</span>
+<span class="k">print</span>(counts)</code></pre>
+<div class="lbl mt">Output</div><div class="out">{'Chennai': 3, 'Pune': 2, 'Delhi': 1}</div>
+</article>
+<h2 class="cat" id="py-classes-and-objects">Classes and objects</h2>
+<article class="e"><h3>class and object</h3>
+<div class="why"><span class="lbl">Why it exists</span><p>The blueprint and the house. Nothing in the OOP days makes sense until that split is clear: the class is the drawing, the object is the building, and the drawing never moves in.</p></div>
+<div class="what"><span class="lbl">In short</span><p>A class is the design. An object is one real thing built from that design. The class is written once; you can build as many objects as you like.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Employee:
+    company = "TAP Academy"
+
+e1 = Employee()
+e2 = Employee()
+<span class="k">print</span>(<span class="k">type</span>(e1))
+<span class="k">print</span>(e1.company)
+<span class="k">print</span>(e2.company)</code></pre>
+<div class="lbl mt">Output</div><div class="out">&lt;class '__main__.Employee'&gt;
+TAP Academy
+TAP Academy</div>
+</article>
+<article class="e"><h3>__init__</h3>
+<div class="what"><span class="lbl">In short</span><p>The method Python runs automatically the moment an object is made. Put the setting-up in here. It is the constructor, and it has two underscores on each side.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Employee:
+    <span class="k">def</span> __init__(<span class="k">self</span>):
+        <span class="k">print</span>("a new employee object was just made")
+
+e1 = Employee()
+e2 = Employee()</code></pre>
+<div class="lbl mt">Output</div><div class="out">a new employee object was just made
+a new employee object was just made</div>
+</article>
+<article class="e"><h3>__init__ with values</h3>
+<div class="what"><span class="lbl">In short</span><p>Anything you pass in the brackets when you build the object arrives as a parameter of __init__.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Employee:
+    <span class="k">def</span> __init__(<span class="k">self</span>, name, dept, salary):
+        <span class="k">self</span>.name = name
+        <span class="k">self</span>.dept = dept
+        <span class="k">self</span>.salary = salary
+
+e = Employee("Priya", "Tech", <span class="o">62000</span>)
+<span class="k">print</span>(e.name, e.dept, e.salary)</code></pre>
+<div class="lbl mt">Output</div><div class="out">Priya Tech 62000</div>
+</article>
+<article class="e"><h3>self</h3>
+<div class="what"><span class="lbl">In short</span><p>The object itself, handed to every method as the first parameter. You never pass it when you call; Python does that for you.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Employee:
+    <span class="k">def</span> __init__(<span class="k">self</span>, name):
+        <span class="k">self</span>.name = name          <span class="c"># store it ON this object</span>
+
+    <span class="k">def</span> show(<span class="k">self</span>):
+        <span class="k">print</span>("I am", <span class="k">self</span>.name)
+
+e = Employee("Arun")
+e.show()
+Employee.show(e)                  <span class="c"># the same call, written out in full</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">I am Arun
+I am Arun</div>
+</article>
+<article class="e"><h3>Instance variables</h3>
+<div class="what"><span class="lbl">In short</span><p>A variable stored on self belongs to that one object. Two objects of the same class hold their own separate values.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Employee:
+    <span class="k">def</span> __init__(<span class="k">self</span>, name, salary):
+        <span class="k">self</span>.name = name
+        <span class="k">self</span>.salary = salary
+
+a = Employee("Priya", <span class="o">62000</span>)
+b = Employee("Arun", <span class="o">50000</span>)
+<span class="k">print</span>(a.salary, b.salary)
+a.salary = <span class="o">70000</span>
+<span class="k">print</span>(a.salary, b.salary)         <span class="c"># b is untouched</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">62000 50000
+70000 50000</div>
+</article>
+<article class="e"><h3>Methods</h3>
+<div class="what"><span class="lbl">In short</span><p>A function that lives inside a class. It can read and change the object it was called on.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Employee:
+    <span class="k">def</span> __init__(<span class="k">self</span>, name, salary):
+        <span class="k">self</span>.name = name
+        <span class="k">self</span>.salary = salary
+
+    <span class="k">def</span> hike(<span class="k">self</span>, percent):
+        <span class="k">self</span>.salary = <span class="k">self</span>.salary + <span class="k">self</span>.salary * percent / <span class="o">100</span>
+
+    <span class="k">def</span> show(<span class="k">self</span>):
+        <span class="k">print</span>(<span class="k">self</span>.name, <span class="k">self</span>.salary)
+
+e = Employee("Priya", <span class="o">60000</span>)
+e.show()
+e.hike(<span class="o">10</span>)
+e.show()</code></pre>
+<div class="lbl mt">Output</div><div class="out">Priya 60000
+Priya 66000.0</div>
+</article>
+<article class="e"><h3>A method that returns something</h3>
+<div class="what"><span class="lbl">In short</span><p>Methods use return exactly like ordinary functions do.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Employee:
+    <span class="k">def</span> __init__(<span class="k">self</span>, salary):
+        <span class="k">self</span>.salary = salary
+
+    <span class="k">def</span> monthly(<span class="k">self</span>):
+        <span class="k">return</span> <span class="k">round</span>(<span class="k">self</span>.salary / <span class="o">12</span>, <span class="o">2</span>)
+
+e = Employee(<span class="o">620000</span>)
+<span class="k">print</span>(e.monthly())</code></pre>
+<div class="lbl mt">Output</div><div class="out">51666.67</div>
+</article>
+<article class="e"><h3>Class variable against instance variable</h3>
+<div class="what"><span class="lbl">In short</span><p>A class variable is written in the class body and shared by every object. An instance variable is written on self and belongs to one object.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Employee:
+    company = "TAP Academy"           <span class="c"># shared by all</span>
+    count = <span class="o">0</span>
+
+    <span class="k">def</span> __init__(<span class="k">self</span>, name):
+        <span class="k">self</span>.name = name              <span class="c"># one per object</span>
+        Employee.count += <span class="o">1</span>
+
+a = Employee("Priya")
+b = Employee("Arun")
+<span class="k">print</span>(a.company, b.company)
+<span class="k">print</span>("objects made:", Employee.count)
+Employee.company = "TAP"              <span class="c"># change it once</span>
+<span class="k">print</span>(a.company, b.company)           <span class="c"># both see it</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">TAP Academy TAP Academy
+objects made: 2
+TAP TAP</div>
+</article>
+<article class="e"><h3>Many objects from a loop</h3>
+<div class="what"><span class="lbl">In short</span><p>Build a list of objects and you have a tiny database you can walk through.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Employee:
+    <span class="k">def</span> __init__(<span class="k">self</span>, name, salary):
+        <span class="k">self</span>.name = name
+        <span class="k">self</span>.salary = salary
+
+rows = [("Priya", <span class="o">62000</span>), ("Arun", <span class="o">50000</span>), ("Kavita", <span class="o">48000</span>)]
+staff = []
+<span class="k">for</span> name, salary <span class="k">in</span> rows:
+    staff.append(Employee(name, salary))
+
+<span class="k">for</span> e <span class="k">in</span> staff:
+    <span class="k">print</span>(e.name, e.salary)
+<span class="k">print</span>("total payroll:", <span class="k">sum</span>([e.salary <span class="k">for</span> e <span class="k">in</span> staff]))</code></pre>
+<div class="lbl mt">Output</div><div class="out">Priya 62000
+Arun 50000
+Kavita 48000
+total payroll: 160000</div>
+</article>
+<article class="e"><h3>Default values in __init__</h3>
+<div class="what"><span class="lbl">In short</span><p>Same rule as any function: give the parameter a default and the caller may leave it out.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Employee:
+    <span class="k">def</span> __init__(<span class="k">self</span>, name, dept="Unassigned"):
+        <span class="k">self</span>.name = name
+        <span class="k">self</span>.dept = dept
+
+<span class="k">print</span>(Employee("Priya", "Tech").dept)
+<span class="k">print</span>(Employee("Arun").dept)</code></pre>
+<div class="lbl mt">Output</div><div class="out">Tech
+Unassigned</div>
+</article>
+<article class="e"><h3>Dunder methods</h3>
+<div class="what"><span class="lbl">In short</span><p>Names with two underscores each side are Python&rsquo;s own hooks. __init__ is the one you write; there are many others that Python calls behind your back. The long number in the first line is where the object sits in memory, so yours will be different every time you run it.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Employee:
+    <span class="k">def</span> __init__(<span class="k">self</span>, name):
+        <span class="k">self</span>.name = name
+
+e = Employee("Priya")
+<span class="k">print</span>(e)                 <span class="c"># unhelpful by default</span>
+<span class="k">print</span>(<span class="k">len</span>("TAP"))        <span class="c"># calls the string's __len__ for you</span>
+<span class="k">print</span>("a" + "b")         <span class="c"># calls __add__</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">&lt;__main__.Employee object at 0x1077b8050&gt;
+3
+ab</div>
+</article>
+<h2 class="cat" id="py-encapsulation">Encapsulation</h2>
+<article class="e"><h3>What it means</h3>
+<div class="why"><span class="lbl">Why it exists</span><p>Without it, anyone can set a salary to minus five lakh. With it, every change has to go through a method you wrote, so you get to say what counts as valid.</p></div>
+<div class="what"><span class="lbl">In short</span><p>Keeping the data and the methods that work on it inside one class, and controlling what the outside world is allowed to touch.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Account:
+    <span class="k">def</span> __init__(<span class="k">self</span>, balance):
+        <span class="k">self</span>.__balance = balance        <span class="c"># hidden</span>
+
+    <span class="k">def</span> deposit(<span class="k">self</span>, amount):          <span class="c"># the only way in</span>
+        <span class="k">if</span> amount &gt; <span class="o">0</span>:
+            <span class="k">self</span>.__balance += amount
+
+    <span class="k">def</span> get_balance(<span class="k">self</span>):
+        <span class="k">return</span> <span class="k">self</span>.__balance
+
+a = Account(<span class="o">1000</span>)
+a.deposit(<span class="o">500</span>)
+a.deposit(-<span class="o">9999</span>)                        <span class="c"># refused by the method</span>
+<span class="k">print</span>(a.get_balance())</code></pre>
+<div class="lbl mt">Output</div><div class="out">1500</div>
+</article>
+<article class="e"><h3>Public</h3>
+<div class="what"><span class="lbl">In short</span><p>No underscore. Anybody can read it and anybody can change it, including to nonsense.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Employee:
+    <span class="k">def</span> __init__(<span class="k">self</span>, salary):
+        <span class="k">self</span>.salary = salary
+
+e = Employee(<span class="o">50000</span>)
+<span class="k">print</span>(e.salary)
+e.salary = -<span class="o">99999</span>            <span class="c"># nothing stops this</span>
+<span class="k">print</span>(e.salary)</code></pre>
+<div class="lbl mt">Output</div><div class="out">50000
+-99999</div>
+</article>
+<article class="e"><h3>Protected, one underscore</h3>
+<div class="what"><span class="lbl">In short</span><p>A single leading underscore is a convention meaning "this is internal, please leave it alone". Python does not actually enforce it.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Employee:
+    <span class="k">def</span> __init__(<span class="k">self</span>, salary):
+        <span class="k">self</span>._salary = salary
+
+e = Employee(<span class="o">50000</span>)
+<span class="k">print</span>(e._salary)             <span class="c"># it still works</span></code></pre>
+<div class="lbl mt">Output</div><div class="out">50000</div>
+</article>
+<article class="e"><h3>Private, two underscores</h3>
+<div class="what"><span class="lbl">In short</span><p>Two leading underscores and the name is no longer reachable from outside under that spelling.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Employee:
+    <span class="k">def</span> __init__(<span class="k">self</span>, salary):
+        <span class="k">self</span>.__salary = salary
+
+e = Employee(<span class="o">50000</span>)
+<span class="k">print</span>(e.__salary)</code></pre>
+<div class="lbl mt">Output</div><div class="out">AttributeError: 'Employee' object has no attribute '__salary'</div>
+</article>
+<article class="e"><h3>Name mangling</h3>
+<div class="what"><span class="lbl">In short</span><p>What actually happens: Python renames __salary to _ClassName__salary. "Private" in Python means hidden, not locked.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Employee:
+    <span class="k">def</span> __init__(<span class="k">self</span>, salary):
+        <span class="k">self</span>.__salary = salary
+
+e = Employee(<span class="o">50000</span>)
+<span class="k">print</span>(e._Employee__salary)
+<span class="k">print</span>([a <span class="k">for</span> a <span class="k">in</span> <span class="k">dir</span>(e) <span class="k">if</span> "salary" <span class="k">in</span> a])</code></pre>
+<div class="lbl mt">Output</div><div class="out">50000
+['_Employee__salary']</div>
+</article>
+<article class="e"><h3>Getter</h3>
+<div class="what"><span class="lbl">In short</span><p>A method whose only job is to hand the hidden value out. Read-only access, on your terms.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Employee:
+    <span class="k">def</span> __init__(<span class="k">self</span>, name, salary):
+        <span class="k">self</span>.__name = name
+        <span class="k">self</span>.__salary = salary
+
+    <span class="k">def</span> get_name(<span class="k">self</span>):
+        <span class="k">return</span> <span class="k">self</span>.__name
+
+    <span class="k">def</span> get_salary(<span class="k">self</span>):
+        <span class="k">return</span> <span class="k">self</span>.__salary
+
+e = Employee("Priya", <span class="o">62000</span>)
+<span class="k">print</span>(e.get_name(), e.get_salary())</code></pre>
+<div class="lbl mt">Output</div><div class="out">Priya 62000</div>
+</article>
+<article class="e"><h3>Setter</h3>
+<div class="what"><span class="lbl">In short</span><p>A method that changes the hidden value, and the place to put the rules about what is allowed.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Employee:
+    <span class="k">def</span> __init__(<span class="k">self</span>, salary):
+        <span class="k">self</span>.__salary = salary
+
+    <span class="k">def</span> set_salary(<span class="k">self</span>, value):
+        <span class="k">if</span> value &lt;= <span class="o">0</span>:
+            <span class="k">print</span>("refused: salary must be positive")
+            <span class="k">return</span>
+        <span class="k">self</span>.__salary = value
+
+    <span class="k">def</span> get_salary(<span class="k">self</span>):
+        <span class="k">return</span> <span class="k">self</span>.__salary
+
+e = Employee(<span class="o">50000</span>)
+e.set_salary(<span class="o">70000</span>)
+<span class="k">print</span>(e.get_salary())
+e.set_salary(-<span class="o">100</span>)
+<span class="k">print</span>(e.get_salary())</code></pre>
+<div class="lbl mt">Output</div><div class="out">70000
+refused: salary must be positive
+70000</div>
+</article>
+<article class="e"><h3>Validation in one place</h3>
+<div class="what"><span class="lbl">In short</span><p>The real payoff. Every route to the value runs through your check, so bad data cannot get in no matter who is calling.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Employee:
+    <span class="k">def</span> __init__(<span class="k">self</span>, dept):
+        <span class="k">self</span>.__dept = <span class="k">None</span>
+        <span class="k">self</span>.set_dept(dept)              <span class="c"># even __init__ goes through the check</span>
+
+    <span class="k">def</span> set_dept(<span class="k">self</span>, value):
+        allowed = ["Sales", "Tech", "HR", "Legal"]
+        <span class="k">if</span> value <span class="k">not</span> <span class="k">in</span> allowed:
+            <span class="k">print</span>("refused:", value, "is not a department")
+            <span class="k">return</span>
+        <span class="k">self</span>.__dept = value
+
+    <span class="k">def</span> get_dept(<span class="k">self</span>):
+        <span class="k">return</span> <span class="k">self</span>.__dept
+
+a = Employee("Tech")
+<span class="k">print</span>(a.get_dept())
+b = Employee("Pizza")
+<span class="k">print</span>(b.get_dept())</code></pre>
+<div class="lbl mt">Output</div><div class="out">Tech
+refused: Pizza is not a department
+None</div>
+</article>
+<h2 class="cat" id="py-inheritance">Inheritance</h2>
+<article class="e"><h3>Parent and child</h3>
+<div class="why"><span class="lbl">Why it exists</span><p>Write the common part once. Change it once. The alternative is the same twenty lines pasted into five classes, and a bug fixed in only four of them.</p></div>
+<div class="what"><span class="lbl">In short</span><p>Put the parent class in brackets after the child name and the child gets everything the parent has, without a line of it being copied.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Employee:
+    <span class="k">def</span> __init__(<span class="k">self</span>, name):
+        <span class="k">self</span>.name = name
+
+    <span class="k">def</span> show(<span class="k">self</span>):
+        <span class="k">print</span>("employee:", <span class="k">self</span>.name)
+
+<span class="k">class</span> Manager(Employee):          <span class="c"># Manager inherits from Employee</span>
+    <span class="k">pass</span>
+
+m = Manager("Priya")
+m.show()                          <span class="c"># a method it never defined</span>
+<span class="k">print</span>(m.name)</code></pre>
+<div class="lbl mt">Output</div><div class="out">employee: Priya
+Priya</div>
+</article>
+<article class="e"><h3>The child adds its own</h3>
+<div class="what"><span class="lbl">In short</span><p>Everything from the parent, plus whatever is new. The parent knows nothing about the child.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Employee:
+    <span class="k">def</span> __init__(<span class="k">self</span>, name):
+        <span class="k">self</span>.name = name
+
+    <span class="k">def</span> show(<span class="k">self</span>):
+        <span class="k">print</span>("employee:", <span class="k">self</span>.name)
+
+<span class="k">class</span> Manager(Employee):
+    <span class="k">def</span> approve(<span class="k">self</span>, what):
+        <span class="k">print</span>(<span class="k">self</span>.name, "approved", what)
+
+m = Manager("Priya")
+m.show()
+m.approve("leave request")</code></pre>
+<div class="lbl mt">Output</div><div class="out">employee: Priya
+Priya approved leave request</div>
+</article>
+<article class="e"><h3>super()</h3>
+<div class="what"><span class="lbl">In short</span><p>When the child writes its own __init__ the parent one stops running. super().__init__() calls it by hand so the parent still does its share.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Employee:
+    <span class="k">def</span> __init__(<span class="k">self</span>, name):
+        <span class="k">self</span>.name = name
+        <span class="k">print</span>("Employee __init__ ran")
+
+<span class="k">class</span> Manager(Employee):
+    <span class="k">def</span> __init__(<span class="k">self</span>, name, team_size):
+        <span class="k">super</span>().__init__(name)        <span class="c"># run the parent's setup first</span>
+        <span class="k">self</span>.team_size = team_size
+
+m = Manager("Priya", <span class="o">4</span>)
+<span class="k">print</span>(m.name, m.team_size)</code></pre>
+<div class="lbl mt">Output</div><div class="out">Employee __init__ ran
+Priya 4</div>
+</article>
+<article class="e"><h3>Forgetting super()</h3>
+<div class="what"><span class="lbl">In short</span><p>Leave it out and whatever the parent set up never happens, so the attribute is simply not there.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Employee:
+    <span class="k">def</span> __init__(<span class="k">self</span>, name):
+        <span class="k">self</span>.name = name
+
+<span class="k">class</span> Manager(Employee):
+    <span class="k">def</span> __init__(<span class="k">self</span>, team_size):
+        <span class="k">self</span>.team_size = team_size    <span class="c"># parent __init__ never ran</span>
+
+m = Manager(<span class="o">4</span>)
+<span class="k">print</span>(m.team_size)
+<span class="k">print</span>(m.name)</code></pre>
+<div class="lbl mt">Output</div><div class="out">4
+AttributeError: 'Manager' object has no attribute 'name'</div>
+</article>
+<article class="e"><h3>Method overriding</h3>
+<div class="what"><span class="lbl">In short</span><p>Give the child a method with the same name and the child version wins. The parent version is still there for the parent.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Employee:
+    <span class="k">def</span> show(<span class="k">self</span>):
+        <span class="k">print</span>("I am an employee")
+
+<span class="k">class</span> Manager(Employee):
+    <span class="k">def</span> show(<span class="k">self</span>):                   <span class="c"># same name, new body</span>
+        <span class="k">print</span>("I am a manager")
+
+Employee().show()
+Manager().show()</code></pre>
+<div class="lbl mt">Output</div><div class="out">I am an employee
+I am a manager</div>
+</article>
+<article class="e"><h3>Overriding but keeping the parent version too</h3>
+<div class="what"><span class="lbl">In short</span><p>Call super() inside the override and you get both behaviours, parent first.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Employee:
+    <span class="k">def</span> show(<span class="k">self</span>):
+        <span class="k">print</span>("name and ID printed")
+
+<span class="k">class</span> Manager(Employee):
+    <span class="k">def</span> show(<span class="k">self</span>):
+        <span class="k">super</span>().show()                <span class="c"># do what the parent did</span>
+        <span class="k">print</span>("plus the team list")   <span class="c"># then add to it</span>
+
+Manager().show()</code></pre>
+<div class="lbl mt">Output</div><div class="out">name and ID printed
+plus the team list</div>
+</article>
+<article class="e"><h3>Multilevel inheritance</h3>
+<div class="what"><span class="lbl">In short</span><p>A child of a child. Everything flows down the chain, so the grandchild has all of it.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Person:
+    <span class="k">def</span> breathe(<span class="k">self</span>):
+        <span class="k">print</span>("breathing")
+
+<span class="k">class</span> Employee(Person):
+    <span class="k">def</span> work(<span class="k">self</span>):
+        <span class="k">print</span>("working")
+
+<span class="k">class</span> Manager(Employee):
+    <span class="k">def</span> approve(<span class="k">self</span>):
+        <span class="k">print</span>("approving")
+
+m = Manager()
+m.breathe()
+m.work()
+m.approve()</code></pre>
+<div class="lbl mt">Output</div><div class="out">breathing
+working
+approving</div>
+</article>
+<article class="e"><h3>isinstance and issubclass</h3>
+<div class="what"><span class="lbl">In short</span><p>isinstance asks about an object, issubclass asks about a class. A Manager object is also an Employee, but not the other way round.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Employee:
+    <span class="k">pass</span>
+
+<span class="k">class</span> Manager(Employee):
+    <span class="k">pass</span>
+
+m = Manager()
+<span class="k">print</span>(<span class="k">isinstance</span>(m, Manager))
+<span class="k">print</span>(<span class="k">isinstance</span>(m, Employee))
+<span class="k">print</span>(<span class="k">isinstance</span>(Employee(), Manager))
+<span class="k">print</span>(<span class="k">issubclass</span>(Manager, Employee))</code></pre>
+<div class="lbl mt">Output</div><div class="out">True
+True
+False
+True</div>
+</article>
+<article class="e"><h3>The named types</h3>
+<div class="what"><span class="lbl">In short</span><p>Single is one parent. Multilevel is a chain. Hierarchical is several children of one parent. Multiple is one child with several parents. Hybrid is a mix of those.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> A:
+    <span class="k">def</span> hello(<span class="k">self</span>):
+        <span class="k">print</span>("A")
+
+<span class="k">class</span> B:
+    <span class="k">def</span> world(<span class="k">self</span>):
+        <span class="k">print</span>("B")
+
+<span class="k">class</span> C(A, B):          <span class="c"># multiple: two parents at once</span>
+    <span class="k">pass</span>
+
+c = C()
+c.hello()
+c.world()
+<span class="k">print</span>(C.__mro__[<span class="o">0</span>].__name__, C.__mro__[<span class="o">1</span>].__name__, C.__mro__[<span class="o">2</span>].__name__)</code></pre>
+<div class="lbl mt">Output</div><div class="out">A
+B
+C A B</div>
+</article>
+<h2 class="cat" id="py-polymorphism">Polymorphism</h2>
+<article class="e"><h3>One name, several behaviours</h3>
+<div class="why"><span class="lbl">Why it exists</span><p>It is what lets you write one loop that handles a mixed pile of objects. The loop does not ask what anything is; it just calls the method and trusts each class to behave.</p></div>
+<div class="what"><span class="lbl">In short</span><p>The word means many forms. The same method name does the right thing for whichever class the object happens to be.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Dog:
+    <span class="k">def</span> speak(<span class="k">self</span>):
+        <span class="k">print</span>("Woof")
+
+<span class="k">class</span> Cat:
+    <span class="k">def</span> speak(<span class="k">self</span>):
+        <span class="k">print</span>("Meow")
+
+<span class="k">for</span> animal <span class="k">in</span> [Dog(), Cat(), Dog()]:
+    animal.speak()</code></pre>
+<div class="lbl mt">Output</div><div class="out">Woof
+Meow
+Woof</div>
+</article>
+<article class="e"><h3>Duck typing</h3>
+<div class="what"><span class="lbl">In short</span><p>Python never checks the class. If the object has the method, the call works. If it walks like a duck, it is treated as a duck.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Dog:
+    <span class="k">def</span> speak(<span class="k">self</span>):
+        <span class="k">print</span>("Woof")
+
+<span class="k">class</span> Car:                       <span class="c"># nothing to do with animals</span>
+    <span class="k">def</span> speak(<span class="k">self</span>):
+        <span class="k">print</span>("Vroom")
+
+<span class="k">def</span> make_it_speak(thing):
+    thing.speak()                <span class="c"># no type check anywhere</span>
+
+make_it_speak(Dog())
+make_it_speak(Car())</code></pre>
+<div class="lbl mt">Output</div><div class="out">Woof
+Vroom</div>
+</article>
+<article class="e"><h3>When the method is missing</h3>
+<div class="what"><span class="lbl">In short</span><p>The flip side of duck typing. Nothing is checked in advance, so you only find out when it runs.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Rock:
+    <span class="k">pass</span>
+
+<span class="k">def</span> make_it_speak(thing):
+    thing.speak()
+
+make_it_speak(Rock())</code></pre>
+<div class="lbl mt">Output</div><div class="out">AttributeError: 'Rock' object has no attribute 'speak'</div>
+</article>
+<article class="e"><h3>Built-in polymorphism</h3>
+<div class="what"><span class="lbl">In short</span><p>The operators and built-ins already work this way. + and len() behave differently depending on what you hand them.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">print</span>(<span class="o">10</span> + <span class="o">5</span>)                    <span class="c"># adds</span>
+<span class="k">print</span>("Da" + "ta")               <span class="c"># joins</span>
+<span class="k">print</span>([<span class="o">1</span>, <span class="o">2</span>] + [<span class="o">3</span>])              <span class="c"># extends</span>
+<span class="k">print</span>(<span class="k">len</span>("TAP"), <span class="k">len</span>([<span class="o">1</span>, <span class="o">2</span>, <span class="o">3</span>]), <span class="k">len</span>({"a": <span class="o">1</span>}))</code></pre>
+<div class="lbl mt">Output</div><div class="out">15
+Data
+[1, 2, 3]
+3 3 1</div>
+</article>
+<article class="e"><h3>Overriding is polymorphism</h3>
+<div class="what"><span class="lbl">In short</span><p>The parent promises a method, every child keeps the promise its own way, and the caller does not need to know which is which.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Report:
+    <span class="k">def</span> render(<span class="k">self</span>):
+        <span class="k">print</span>("plain text")
+
+<span class="k">class</span> PdfReport(Report):
+    <span class="k">def</span> render(<span class="k">self</span>):
+        <span class="k">print</span>("a PDF")
+
+<span class="k">class</span> ExcelReport(Report):
+    <span class="k">def</span> render(<span class="k">self</span>):
+        <span class="k">print</span>("a spreadsheet")
+
+<span class="k">for</span> r <span class="k">in</span> [Report(), PdfReport(), ExcelReport()]:
+    r.render()</code></pre>
+<div class="lbl mt">Output</div><div class="out">plain text
+a PDF
+a spreadsheet</div>
+</article>
+<article class="e"><h3>Method overloading does not exist in Python</h3>
+<div class="what"><span class="lbl">In short</span><p>Two methods with the same name do not coexist: the second definition replaces the first. Use a default parameter to get the same effect.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Calc:
+    <span class="k">def</span> add(<span class="k">self</span>, a, b):
+        <span class="k">return</span> a + b
+
+    <span class="k">def</span> add(<span class="k">self</span>, a, b, c):          <span class="c"># this one wins, the first is gone</span>
+        <span class="k">return</span> a + b + c
+
+<span class="k">print</span>(Calc().add(<span class="o">1</span>, <span class="o">2</span>, <span class="o">3</span>))
+
+<span class="k">class</span> Better:
+    <span class="k">def</span> add(<span class="k">self</span>, a, b, c=<span class="o">0</span>):        <span class="c"># one method, both uses</span>
+        <span class="k">return</span> a + b + c
+
+<span class="k">print</span>(Better().add(<span class="o">1</span>, <span class="o">2</span>))
+<span class="k">print</span>(Better().add(<span class="o">1</span>, <span class="o">2</span>, <span class="o">3</span>))</code></pre>
+<div class="lbl mt">Output</div><div class="out">6
+3
+6</div>
+</article>
+<h2 class="cat" id="py-abstraction">Abstraction</h2>
+<article class="e"><h3>What it means</h3>
+<div class="why"><span class="lbl">Why it exists</span><p>Every library you will use is this. You call read_csv and a thousand lines of file parsing happen that you never read. Writing your own classes the same way is the skill.</p></div>
+<div class="what"><span class="lbl">In short</span><p>Showing what something does and hiding how it does it. You call the method; you do not need to know what is inside it.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Card:
+    <span class="k">def</span> pay(<span class="k">self</span>, amount):
+        <span class="k">self</span>.__check_balance()          <span class="c"># hidden steps</span>
+        <span class="k">self</span>.__contact_bank()
+        <span class="k">print</span>("paid", amount)
+
+    <span class="k">def</span> __check_balance(<span class="k">self</span>):
+        <span class="k">print</span>("(checking balance)")
+
+    <span class="k">def</span> __contact_bank(<span class="k">self</span>):
+        <span class="k">print</span>("(contacting bank)")
+
+Card().pay(<span class="o">500</span>)</code></pre>
+<div class="lbl mt">Output</div><div class="out">(checking balance)
+(contacting bank)
+paid 500</div>
+</article>
+<article class="e"><h3>An abstract class</h3>
+<div class="what"><span class="lbl">In short</span><p>Inherit from ABC and mark a method with @abstractmethod and you have written a rule: any child must provide that method.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">from</span> abc <span class="k">import</span> ABC, abstractmethod
+
+<span class="k">class</span> Shape(ABC):
+    @abstractmethod
+    <span class="k">def</span> area(<span class="k">self</span>):
+        <span class="k">pass</span>
+
+<span class="k">class</span> Square(Shape):
+    <span class="k">def</span> __init__(<span class="k">self</span>, side):
+        <span class="k">self</span>.side = side
+
+    <span class="k">def</span> area(<span class="k">self</span>):
+        <span class="k">return</span> <span class="k">self</span>.side ** <span class="o">2</span>
+
+<span class="k">print</span>(Square(<span class="o">5</span>).area())</code></pre>
+<div class="lbl mt">Output</div><div class="out">25</div>
+</article>
+<article class="e"><h3>An abstract class cannot be built</h3>
+<div class="what"><span class="lbl">In short</span><p>That is the point of it. It exists to be inherited from, not to be used directly.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">from</span> abc <span class="k">import</span> ABC, abstractmethod
+
+<span class="k">class</span> Shape(ABC):
+    @abstractmethod
+    <span class="k">def</span> area(<span class="k">self</span>):
+        <span class="k">pass</span>
+
+s = Shape()</code></pre>
+<div class="lbl mt">Output</div><div class="out">TypeError: Can't instantiate abstract class Shape without an implementation for abstract method 'area'</div>
+</article>
+<article class="e"><h3>The child must implement it</h3>
+<div class="what"><span class="lbl">In short</span><p>Skip the abstract method in the child and the child cannot be built either. The error arrives early, which is what you want.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">from</span> abc <span class="k">import</span> ABC, abstractmethod
+
+<span class="k">class</span> Shape(ABC):
+    @abstractmethod
+    <span class="k">def</span> area(<span class="k">self</span>):
+        <span class="k">pass</span>
+
+<span class="k">class</span> Circle(Shape):
+    <span class="k">pass</span>                     <span class="c"># area() never written</span>
+
+c = Circle()</code></pre>
+<div class="lbl mt">Output</div><div class="out">TypeError: Can't instantiate abstract class Circle without an implementation for abstract method 'area'</div>
+</article>
+<article class="e"><h3>Abstraction against encapsulation</h3>
+<div class="what"><span class="lbl">In short</span><p>Encapsulation hides the data. Abstraction hides the work. Both are about showing less, but they hide different things.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">class</span> Payroll:
+    <span class="k">def</span> __init__(<span class="k">self</span>, salary):
+        <span class="k">self</span>.__salary = salary          <span class="c"># encapsulation: data hidden</span>
+
+    <span class="k">def</span> monthly_slip(<span class="k">self</span>):             <span class="c"># abstraction: work hidden</span>
+        <span class="k">return</span> <span class="k">self</span>.__net()
+
+    <span class="k">def</span> __net(<span class="k">self</span>):
+        <span class="k">return</span> <span class="k">round</span>(<span class="k">self</span>.__salary / <span class="o">12</span> * <span class="o">0.9</span>, <span class="o">2</span>)
+
+<span class="k">print</span>(Payroll(<span class="o">600000</span>).monthly_slip())</code></pre>
+<div class="lbl mt">Output</div><div class="out">45000.0</div>
+</article>
+<h2 class="cat" id="py-modules">Modules</h2>
+<article class="e"><h3>import</h3>
+<div class="why"><span class="lbl">Why it exists</span><p>You will never write a module that matters in this course, but you will import one in every single file. import numpy and import pandas are this exact line.</p></div>
+<div class="what"><span class="lbl">In short</span><p>A module is a file full of code somebody else already wrote. import brings it in, and you then reach inside it with a dot.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> math
+
+<span class="k">print</span>(math.sqrt(<span class="o">144</span>))
+<span class="k">print</span>(math.pi)
+<span class="k">print</span>(math.floor(<span class="o">9.7</span>), math.ceil(<span class="o">9.2</span>))</code></pre>
+<div class="lbl mt">Output</div><div class="out">12.0
+3.141592653589793
+9 10</div>
+</article>
+<article class="e"><h3>from ... import</h3>
+<div class="what"><span class="lbl">In short</span><p>Takes named pieces out of the module so you can use them without the prefix.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">from</span> math <span class="k">import</span> sqrt, pi
+
+<span class="k">print</span>(sqrt(<span class="o">81</span>))
+<span class="k">print</span>(<span class="k">round</span>(pi, <span class="o">4</span>))</code></pre>
+<div class="lbl mt">Output</div><div class="out">9.0
+3.1416</div>
+</article>
+<article class="e"><h3>import ... as</h3>
+<div class="what"><span class="lbl">In short</span><p>Gives the module a shorter name for the rest of the file. This is why everyone writes np and pd.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> math <span class="k">as</span> m
+
+<span class="k">print</span>(m.sqrt(<span class="o">49</span>))</code></pre>
+<div class="lbl mt">Output</div><div class="out">7.0</div>
+</article>
+<article class="e"><h3>random</h3>
+<div class="what"><span class="lbl">In short</span><p>Random numbers. Set a seed first and you get the same sequence every time, which is how you make a random example reproducible.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> random
+
+random.seed(<span class="o">1</span>)                          <span class="c"># fixes the result</span>
+<span class="k">print</span>(random.randint(<span class="o">1</span>, <span class="o">100</span>))
+<span class="k">print</span>(random.choice(["Sales", "Tech", "HR"]))
+nums = [<span class="o">1</span>, <span class="o">2</span>, <span class="o">3</span>, <span class="o">4</span>, <span class="o">5</span>]
+random.shuffle(nums)
+<span class="k">print</span>(nums)</code></pre>
+<div class="lbl mt">Output</div><div class="out">18
+HR
+[4, 2, 5, 3, 1]</div>
+</article>
+<article class="e"><h3>datetime</h3>
+<div class="what"><span class="lbl">In short</span><p>Dates as real objects rather than text, so you can subtract them and get an answer that makes sense.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">from</span> datetime <span class="k">import</span> date
+
+joined = date(<span class="o">2026</span>, <span class="o">7</span>, <span class="o">20</span>)
+today = date(<span class="o">2026</span>, <span class="o">11</span>, <span class="o">26</span>)
+<span class="k">print</span>(joined)
+<span class="k">print</span>(joined.year, joined.month, joined.day)
+gap = today - joined
+<span class="k">print</span>(gap.days, "days")</code></pre>
+<div class="lbl mt">Output</div><div class="out">2026-07-20
+2026 7 20
+129 days</div>
+</article>
+<article class="e"><h3>Writing your own module</h3>
+<div class="what"><span class="lbl">In short</span><p>Any .py file is a module. Save it next to your code, import it by file name without the .py, and use what is inside.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="c"># first, write a file called payroll_tools.py</span>
+code = """
+def monthly(annual):
+    return round(annual / 12, 2)
+
+COMPANY = "TAP Academy"
+"""
+<span class="k">open</span>("payroll_tools.py", "w").write(code)
+
+<span class="c"># now use it like any other module</span>
+<span class="k">import</span> payroll_tools
+
+<span class="k">print</span>(payroll_tools.COMPANY)
+<span class="k">print</span>(payroll_tools.monthly(<span class="o">600000</span>))</code></pre>
+<div class="lbl mt">Output</div><div class="out">TAP Academy
+50000.0</div>
+</article>
+<article class="e"><h3>dir()</h3>
+<div class="what"><span class="lbl">In short</span><p>Lists the names inside a module or an object. The quickest way to check whether something is in there without opening a browser.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> math
+
+<span class="k">print</span>("sqrt" <span class="k">in</span> <span class="k">dir</span>(math))
+<span class="k">print</span>("mean" <span class="k">in</span> <span class="k">dir</span>(math))          <span class="c"># not there, that one lives in statistics</span>
+
+<span class="k">class</span> Employee:
+    <span class="k">def</span> __init__(<span class="k">self</span>, name):
+        <span class="k">self</span>.name = name
+
+    <span class="k">def</span> show(<span class="k">self</span>):
+        <span class="k">print</span>(<span class="k">self</span>.name)
+
+e = Employee("Priya")
+<span class="k">print</span>([n <span class="k">for</span> n <span class="k">in</span> <span class="k">dir</span>(e) <span class="k">if</span> <span class="k">not</span> n.startswith("_")])</code></pre>
+<div class="lbl mt">Output</div><div class="out">True
+False
+['name', 'show']</div>
+</article>
+<article class="e"><h3>Module, package, library</h3>
+<div class="what"><span class="lbl">In short</span><p>A module is one file. A package is a folder of modules. A library is the whole thing somebody published. pandas is a library you install once and import for ever.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> math
+<span class="k">import</span> statistics                  <span class="c"># another module in the standard library</span>
+
+<span class="k">print</span>(<span class="k">type</span>(math))
+<span class="k">print</span>(math.__name__)
+<span class="k">print</span>(statistics.__name__)
+<span class="k">print</span>(math.sqrt(<span class="o">16</span>), statistics.mean([<span class="o">1</span>, <span class="o">2</span>, <span class="o">3</span>, <span class="o">4</span>]))</code></pre>
+<div class="lbl mt">Output</div><div class="out">&lt;class 'module'&gt;
+math
+statistics
+4.0 2.5</div>
+</article>
+<h2 class="cat" id="py-files">Files</h2>
+<article class="e"><h3>open, write, close</h3>
+<div class="why"><span class="lbl">Why it exists</span><p>The last piece of plain Python before pandas takes over. read_csv does all of this for you, and the day it chokes on a file you will need to know what it was doing.</p></div>
+<div class="what"><span class="lbl">In short</span><p>open() gets you a file object, write() puts text in, close() finishes the job. Forget the close and the text may never reach the disk.</p></div>
+<div class="lbl mt">Code</div><pre><code>f = <span class="k">open</span>("notes.txt", "w")
+f.write("Priya,Tech,62000\n")
+f.write("Arun,Sales,50000\n")
+f.close()
+
+<span class="k">print</span>(<span class="k">open</span>("notes.txt").read())</code></pre>
+<div class="lbl mt">Output</div><div class="out">Priya,Tech,62000
+Arun,Sales,50000</div>
+</article>
+<article class="e"><h3>The modes</h3>
+<div class="what"><span class="lbl">In short</span><p>"r" read, and it is the default. "w" write, which wipes the file first. "a" append, which adds to the end. "r" on a file that does not exist is an error.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">open</span>("m.txt", "w").write("first\n")      <span class="c"># creates or wipes</span>
+<span class="k">open</span>("m.txt", "a").write("second\n")     <span class="c"># adds</span>
+<span class="k">print</span>(<span class="k">open</span>("m.txt", "r").read())</code></pre>
+<div class="lbl mt">Output</div><div class="out">first
+second</div>
+</article>
+<article class="e"><h3>"w" destroys what was there</h3>
+<div class="what"><span class="lbl">In short</span><p>The most expensive mistake in this section. Opening for writing empties the file before you have written a thing.</p></div>
+<div class="lbl mt">Code</div><pre><code>f = <span class="k">open</span>("data.txt", "w")
+f.write("important numbers\n")
+f.close()
+<span class="k">print</span>("before:", <span class="k">open</span>("data.txt").read().strip())
+
+f = <span class="k">open</span>("data.txt", "w")        <span class="c"># gone, instantly</span>
+f.close()
+<span class="k">print</span>("after: [" + <span class="k">open</span>("data.txt").read().strip() + "]")</code></pre>
+<div class="lbl mt">Output</div><div class="out">before: important numbers
+after: []</div>
+</article>
+<article class="e"><h3>with open</h3>
+<div class="what"><span class="lbl">In short</span><p>Closes the file for you the moment the block ends, even if something goes wrong inside it. Use this and stop thinking about close().</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">with</span> <span class="k">open</span>("staff.txt", "w") <span class="k">as</span> f:
+    f.write("Priya,Tech,62000\n")
+    f.write("Arun,Sales,50000\n")
+    f.write("Kavita,HR,48000\n")
+
+<span class="k">with</span> <span class="k">open</span>("staff.txt") <span class="k">as</span> f:
+    <span class="k">print</span>(f.read())</code></pre>
+<div class="lbl mt">Output</div><div class="out">Priya,Tech,62000
+Arun,Sales,50000
+Kavita,HR,48000</div>
+</article>
+<article class="e"><h3>read, readline, readlines</h3>
+<div class="what"><span class="lbl">In short</span><p>read() gives the whole file as one string. readline() gives one line. readlines() gives a list of lines, with the newline characters still attached.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">with</span> <span class="k">open</span>("staff.txt", "w") <span class="k">as</span> f:
+    f.write("Priya\nArun\nKavita\n")
+
+<span class="k">with</span> <span class="k">open</span>("staff.txt") <span class="k">as</span> f:
+    <span class="k">print</span>(repr(f.read()))
+
+<span class="k">with</span> <span class="k">open</span>("staff.txt") <span class="k">as</span> f:
+    <span class="k">print</span>(repr(f.readline()))
+    <span class="k">print</span>(repr(f.readline()))
+
+<span class="k">with</span> <span class="k">open</span>("staff.txt") <span class="k">as</span> f:
+    <span class="k">print</span>(f.readlines())</code></pre>
+<div class="lbl mt">Output</div><div class="out">'Priya\nArun\nKavita\n'
+'Priya\n'
+'Arun\n'
+['Priya\n', 'Arun\n', 'Kavita\n']</div>
+</article>
+<article class="e"><h3>Looping over the file</h3>
+<div class="what"><span class="lbl">In short</span><p>The file object hands you one line at a time. Better than readlines() on a big file, because it never loads the whole thing into memory.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">with</span> <span class="k">open</span>("staff.txt", "w") <span class="k">as</span> f:
+    f.write("Priya\nArun\nKavita\n")
+
+<span class="k">with</span> <span class="k">open</span>("staff.txt") <span class="k">as</span> f:
+    <span class="k">for</span> line <span class="k">in</span> f:
+        <span class="k">print</span>(line.strip())</code></pre>
+<div class="lbl mt">Output</div><div class="out">Priya
+Arun
+Kavita</div>
+</article>
+<article class="e"><h3>writelines</h3>
+<div class="what"><span class="lbl">In short</span><p>Writes a list of strings. It adds nothing between them, so put your own newline on each one.</p></div>
+<div class="lbl mt">Code</div><pre><code>rows = ["Priya,Tech\n", "Arun,Sales\n", "Kavita,HR\n"]
+<span class="k">with</span> <span class="k">open</span>("out.txt", "w") <span class="k">as</span> f:
+    f.writelines(rows)
+
+<span class="k">print</span>(<span class="k">open</span>("out.txt").read())</code></pre>
+<div class="lbl mt">Output</div><div class="out">Priya,Tech
+Arun,Sales
+Kavita,HR</div>
+</article>
+<article class="e"><h3>Reading a CSV by hand</h3>
+<div class="what"><span class="lbl">In short</span><p>Split each line on the comma and you have your columns. This is read_csv with the lid off.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">with</span> <span class="k">open</span>("emp.csv", "w") <span class="k">as</span> f:
+    f.write("name,dept,salary\n")
+    f.write("Priya,Tech,62000\n")
+    f.write("Arun,Sales,50000\n")
+    f.write("Kavita,HR,48000\n")
+
+<span class="k">with</span> <span class="k">open</span>("emp.csv") <span class="k">as</span> f:
+    header = f.readline().strip().split(",")
+    <span class="k">print</span>("columns:", header)
+    total = <span class="o">0</span>
+    <span class="k">for</span> line <span class="k">in</span> f:
+        parts = line.strip().split(",")
+        <span class="k">print</span>(parts[<span class="o">0</span>], "|", parts[<span class="o">1</span>], "|", parts[<span class="o">2</span>])
+        total += <span class="k">int</span>(parts[<span class="o">2</span>])
+<span class="k">print</span>("payroll:", total)</code></pre>
+<div class="lbl mt">Output</div><div class="out">columns: ['name', 'dept', 'salary']
+Priya | Tech | 62000
+Arun | Sales | 50000
+Kavita | HR | 48000
+payroll: 160000</div>
+</article>
+<article class="e"><h3>Counting lines</h3>
+<div class="what"><span class="lbl">In short</span><p>Useful the moment somebody asks how many rows a file has.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">with</span> <span class="k">open</span>("emp.csv", "w") <span class="k">as</span> f:
+    f.write("name,dept\nPriya,Tech\nArun,Sales\nKavita,HR\n")
+
+<span class="k">with</span> <span class="k">open</span>("emp.csv") <span class="k">as</span> f:
+    lines = f.readlines()
+<span class="k">print</span>("lines in the file:", <span class="k">len</span>(lines))
+<span class="k">print</span>("data rows:", <span class="k">len</span>(lines) - <span class="o">1</span>)</code></pre>
+<div class="lbl mt">Output</div><div class="out">lines in the file: 4
+data rows: 3</div>
+</article>
+<article class="e"><h3>A file that is not there</h3>
+<div class="what"><span class="lbl">In short</span><p>Opening a missing file for reading stops the program. Check first, or create it.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">with</span> <span class="k">open</span>("nothing_here.txt") <span class="k">as</span> f:
+    <span class="k">print</span>(f.read())</code></pre>
+<div class="lbl mt">Output</div><div class="out">FileNotFoundError: [Errno 2] No such file or directory: 'nothing_here.txt'</div>
+</article>
+<article class="e"><h3>Checking before you open</h3>
+<div class="what"><span class="lbl">In short</span><p>os.path.exists tells you whether to bother.</p></div>
+<div class="lbl mt">Code</div><pre><code><span class="k">import</span> os.path
+
+<span class="k">print</span>(os.path.exists("nothing_here.txt"))
+<span class="k">open</span>("here.txt", "w").write("hello")
+<span class="k">print</span>(os.path.exists("here.txt"))
+
+<span class="k">if</span> os.path.exists("here.txt"):
+    <span class="k">print</span>(<span class="k">open</span>("here.txt").read())</code></pre>
+<div class="lbl mt">Output</div><div class="out">False
+True
+hello</div>
+</article></section>
 <section class="sec" id="numpy"><p class="blurb">Arrays — the fast, fixed-type container that pandas is built on.</p><nav class="jump"><a href="#creating-arrays">Creating arrays</a><a href="#checking-an-array">Checking an array</a><a href="#getting-values-out">Getting values out</a><a href="#changing-the-shape">Changing the shape</a><a href="#joining-arrays">Joining arrays</a><a href="#maths-on-arrays">Maths on arrays</a><a href="#summarising">Summarising</a><a href="#searching-and-sorting">Searching and sorting</a></nav><h2 class="cat" id="creating-arrays">Creating arrays</h2>
 <article class="e"><h3>np.array()</h3>
 <div class="what"><span class="lbl">In short</span><p>Turns a list into a NumPy array.</p></div>
@@ -505,7 +2852,7 @@ False</div>
 <div class="lbl mt">Output</div><div class="out">[False  True False]
 [1. 3.]</div>
 </article></section>
-<section class="sec" id="pandas"><p class="blurb">Tables — loading, filtering, cleaning, grouping and joining real data.</p><nav class="jump"><a href="#making-a-series-and-dataframe">Making a Series and DataFrame</a><a href="#reading-and-saving-files">Reading and saving files</a><a href="#looking-at-the-data">Looking at the data</a><a href="#choosing-columns-and-rows">Choosing columns and rows</a><a href="#filtering-rows">Filtering rows</a><a href="#missing-values">Missing values</a><a href="#duplicates">Duplicates</a><a href="#changing-data">Changing data</a><a href="#sorting">Sorting</a><a href="#statistics">Statistics</a><a href="#grouping">Grouping</a><a href="#reshaping">Reshaping</a><a href="#joining-tables">Joining tables</a><a href="#text-columns">Text columns</a><a href="#dates">Dates</a></nav><h2 class="cat" id="making-a-series-and-dataframe">Making a Series and DataFrame</h2>
+<section class="sec" id="pandas"><p class="blurb">Tables — loading, filtering, cleaning, grouping and joining real data.</p><nav class="jump"><a href="#making-a-series-and-dataframe">Making a Series and DataFrame</a><a href="#reading-and-saving-files">Reading and saving files</a><a href="#looking-at-the-data">Looking at the data</a><a href="#choosing-columns-and-rows">Choosing columns and rows</a><a href="#filtering-rows">Filtering rows</a><a href="#missing-values">Missing values</a><a href="#duplicates">Duplicates</a><a href="#changing-data">Changing data</a><a href="#sorting">Sorting</a><a href="#pandas-statistics">Statistics</a><a href="#grouping">Grouping</a><a href="#reshaping">Reshaping</a><a href="#joining-tables">Joining tables</a><a href="#text-columns">Text columns</a><a href="#dates">Dates</a></nav><h2 class="cat" id="making-a-series-and-dataframe">Making a Series and DataFrame</h2>
 <article class="e"><h3>pd.Series()</h3>
 <div class="what"><span class="lbl">In short</span><p>A Series is ONE column of data with an index.</p></div>
 <div class="lbl mt">Code</div><pre><code>s = pd.Series([<span class="o">10</span>, <span class="o">20</span>, <span class="o">30</span>])
@@ -985,7 +3332,7 @@ d['age'] = d['age'].astype(int)
 1  Priya   95000
 2   Amit   58000</div>
 </article>
-<h2 class="cat" id="statistics">Statistics</h2>
+<h2 class="cat" id="pandas-statistics">Statistics</h2>
 <article class="e"><h3>mean() / median()</h3>
 <div class="what"><span class="lbl">In short</span><p>The average and the middle value of a column.</p></div>
 <div class="lbl mt">Code</div><pre><code><span class="k">print</span>(df['salary'].mean())
@@ -2564,7 +4911,7 @@ height_cm     0.061
 age           0.017
 Name: salary, dtype: float64</div>
 </article></section>
-<section class="sec" id="excel"><p class="blurb">The same analysis on a grid - formulas, lookups, pivot tables and the summary sheet.</p><nav class="jump"><a href="#getting-started">Getting started</a><a href="#absolute-references">Absolute references</a><a href="#cleaning">Cleaning</a><a href="#conditions">Conditions</a><a href="#lookups">Lookups</a><a href="#pivot-tables">Pivot tables</a><a href="#charts-and-the-summary">Charts and the summary</a></nav><h2 class="cat" id="getting-started">Getting started</h2>
+<section class="sec" id="excel"><p class="blurb">The same analysis on a grid - formulas, lookups, pivot tables and the summary sheet.</p><nav class="jump"><a href="#excel-getting-started">Getting started</a><a href="#absolute-references">Absolute references</a><a href="#cleaning">Cleaning</a><a href="#conditions">Conditions</a><a href="#lookups">Lookups</a><a href="#pivot-tables">Pivot tables</a><a href="#charts-and-the-summary">Charts and the summary</a></nav><h2 class="cat" id="excel-getting-started">Getting started</h2>
 <article class="e"><h3>The equals sign</h3>
 <div class="what"><span class="lbl">In short</span><p>A cell holds either a value or a formula. Anything starting with = is a formula and is worked out; anything else is stored as typed.</p></div>
 <div class="lbl mt">Code</div><pre><code>38            a value
@@ -2620,13 +4967,13 @@ Name: salary, dtype: float64</div>
 <div class="what"><span class="lbl">In short</span><p>Copying a formula down shifts every reference down with it. Usually that is what you want.</p></div>
 <div class="lbl mt">Code</div><pre><code>M2    =K2-Q10
       fill down
-M3    =K3-Q11      &amp;lt;-- Q11 moved too, and is empty</code></pre>
+M3    =K3-Q11      &lt;-- Q11 moved too, and is empty</code></pre>
 </article>
 <article class="e"><h3>The dollar sign locks it</h3>
 <div class="what"><span class="lbl">In short</span><p>$Q$10 stays at Q10 however far the formula is copied. $Q locks the column, $10 locks the row.</p></div>
 <div class="lbl mt">Code</div><pre><code>M2    =K2-$Q$10
       fill down
-M3    =K3-$Q$10      &amp;lt;-- stayed put</code></pre>
+M3    =K3-$Q$10      &lt;-- stayed put</code></pre>
 </article>
 <article class="e"><h3>Why it matters</h3>
 <div class="what"><span class="lbl">In short</span><p>Without the dollars the column quietly becomes a copy of the one beside it. Nothing turns red.</p></div>
@@ -2636,15 +4983,15 @@ M3    =K3-$Q$10      &amp;lt;-- stayed put</code></pre>
 <h2 class="cat" id="cleaning">Cleaning</h2>
 <article class="e"><h3>Sort</h3>
 <div class="what"><span class="lbl">In short</span><p>Data &gt; Sort. Always sort the whole table, never a single column, or the rows come apart.</p></div>
-<div class="lbl mt">Code</div><pre><code>Data  &amp;gt;  Sort  &amp;gt;  Sort by: salary  &amp;gt;  Largest to Smallest</code></pre>
+<div class="lbl mt">Code</div><pre><code>Data  &gt;  Sort  &gt;  Sort by: salary  &gt;  Largest to Smallest</code></pre>
 </article>
 <article class="e"><h3>Filter</h3>
 <div class="what"><span class="lbl">In short</span><p>Data &gt; Filter puts a dropdown on every heading. It hides rows rather than deleting them.</p></div>
-<div class="lbl mt">Code</div><pre><code>Data  &amp;gt;  Filter        then pick values from the heading dropdown</code></pre>
+<div class="lbl mt">Code</div><pre><code>Data  &gt;  Filter        then pick values from the heading dropdown</code></pre>
 </article>
 <article class="e"><h3>Remove Duplicates</h3>
 <div class="what"><span class="lbl">In short</span><p>Data &gt; Remove Duplicates. It deletes rows permanently, so take a copy of the sheet first.</p></div>
-<div class="lbl mt">Code</div><pre><code>Data  &amp;gt;  Remove Duplicates
+<div class="lbl mt">Code</div><pre><code>Data  &gt;  Remove Duplicates
 
 201 rows  -&gt;  200 rows      (1 duplicate removed)</code></pre>
 </article>
@@ -2659,24 +5006,24 @@ M3    =K3-$Q$10      &amp;lt;-- stayed put</code></pre>
 </article>
 <article class="e"><h3>Text to Columns</h3>
 <div class="what"><span class="lbl">In short</span><p>Splits one column into several on a delimiter. It runs once; it does not keep watching the column.</p></div>
-<div class="lbl mt">Code</div><pre><code>Data  &amp;gt;  Text to Columns  &amp;gt;  Delimited  &amp;gt;  Space
+<div class="lbl mt">Code</div><pre><code>Data  &gt;  Text to Columns  &gt;  Delimited  &gt;  Space
 
 Rahul Sharma   -&gt;   Rahul | Sharma</code></pre>
 </article>
 <article class="e"><h3>Conditional formatting</h3>
 <div class="what"><span class="lbl">In short</span><p>Colours cells that meet a rule, so a problem is visible without reading every row.</p></div>
-<div class="lbl mt">Code</div><pre><code>Home  &amp;gt;  Conditional Formatting  &amp;gt;  Highlight Cells Rules  &amp;gt;  Less Than  &amp;gt;  0
+<div class="lbl mt">Code</div><pre><code>Home  &gt;  Conditional Formatting  &gt;  Highlight Cells Rules  &gt;  Less Than  &gt;  0
 
 (age -4 turns red)</code></pre>
 </article>
 <h2 class="cat" id="conditions">Conditions</h2>
 <article class="e"><h3>IF</h3>
 <div class="what"><span class="lbl">In short</span><p>One test, two answers. The test comes first, then what to show when it is true, then when it is false.</p></div>
-<div class="lbl mt">Code</div><pre><code>=IF(K2&amp;gt;$Q$5, "Above average", "Below average")</code></pre>
+<div class="lbl mt">Code</div><pre><code>=IF(K2&gt;$Q$5, "Above average", "Below average")</code></pre>
 </article>
 <article class="e"><h3>IFS</h3>
 <div class="what"><span class="lbl">In short</span><p>More than two outcomes. Excel checks the conditions in order and stops at the first true one, so order matters.</p></div>
-<div class="lbl mt">Code</div><pre><code>=IFS(H2&amp;lt;=2, "Junior", H2&amp;lt;=7, "Mid", H2&amp;gt;=0, "Senior")</code></pre>
+<div class="lbl mt">Code</div><pre><code>=IFS(H2&lt;=2, "Junior", H2&lt;=7, "Mid", H2&gt;=0, "Senior")</code></pre>
 </article>
 <article class="e"><h3>COUNTIF</h3>
 <div class="what"><span class="lbl">In short</span><p>Counts the cells in a range that meet one condition.</p></div>
@@ -2697,19 +5044,19 @@ Rahul Sharma   -&gt;   Rahul | Sharma</code></pre>
 </article>
 <article class="e"><h3>COUNTIFS  —  two conditions</h3>
 <div class="what"><span class="lbl">In short</span><p>Pairs of range and condition. Every pair must be true for the row to count.</p></div>
-<div class="lbl mt">Code</div><pre><code>=COUNTIFS(D2:D201, "Tech", K2:K201, "&amp;gt;50000")</code></pre>
+<div class="lbl mt">Code</div><pre><code>=COUNTIFS(D2:D201, "Tech", K2:K201, "&gt;50000")</code></pre>
 <div class="lbl mt">Output</div><div class="out">48</div>
 </article>
 <article class="e"><h3>A condition built from a cell</h3>
-<div class="what"><span class="lbl">In short</span><p>To compare against a value in a cell, put the operator in quotes and join it with &amp;amp;.</p></div>
-<div class="lbl mt">Code</div><pre><code>=COUNTIF(K2:K201, "&amp;gt;"&amp;amp;$Q$5)      above the average in Q5
-=COUNTIF(K2:K201, "&amp;lt;"&amp;amp;$Q$5)      below it</code></pre>
+<div class="what"><span class="lbl">In short</span><p>To compare against a value in a cell, put the operator in quotes and join it with &amp;.</p></div>
+<div class="lbl mt">Code</div><pre><code>=COUNTIF(K2:K201, "&gt;"&amp;$Q$5)      above the average in Q5
+=COUNTIF(K2:K201, "&lt;"&amp;$Q$5)      below it</code></pre>
 <div class="lbl mt">Output</div><div class="out">12
 186</div>
 </article>
 <article class="e"><h3>The counts will not always add up</h3>
 <div class="what"><span class="lbl">In short</span><p>12 above and 186 below is 198, not 200. The two blank salaries are neither, and COUNTIF simply skips them.</p></div>
-<div class="lbl mt">Code</div><pre><code>=COUNTIF(K2:K201, "&amp;gt;"&amp;amp;$Q$5) + COUNTIF(K2:K201, "&amp;lt;"&amp;amp;$Q$5)</code></pre>
+<div class="lbl mt">Code</div><pre><code>=COUNTIF(K2:K201, "&gt;"&amp;$Q$5) + COUNTIF(K2:K201, "&lt;"&amp;$Q$5)</code></pre>
 <div class="lbl mt">Output</div><div class="out">198</div>
 </article>
 <h2 class="cat" id="lookups">Lookups</h2>
@@ -2754,7 +5101,7 @@ To look left, use INDEX + MATCH or XLOOKUP.</code></pre>
 <h2 class="cat" id="pivot-tables">Pivot tables</h2>
 <article class="e"><h3>The four boxes</h3>
 <div class="what"><span class="lbl">In short</span><p>Rows is what goes down the side, Columns across the top, Values the number to calculate, Filters which data to include.</p></div>
-<div class="lbl mt">Code</div><pre><code>Insert  &amp;gt;  PivotTable  &amp;gt;  New Worksheet
+<div class="lbl mt">Code</div><pre><code>Insert  &gt;  PivotTable  &gt;  New Worksheet
 
 Rows     what goes down
 Columns  what goes across
@@ -2780,7 +5127,7 @@ Values  Average of salary      the mean</code></pre>
 </article>
 <article class="e"><h3>Sum and Average</h3>
 <div class="what"><span class="lbl">In short</span><p>Right-click any number and choose Summarize Values By.</p></div>
-<div class="lbl mt">Code</div><pre><code>Right-click  &amp;gt;  Summarize Values By  &amp;gt;  Sum / Average</code></pre>
+<div class="lbl mt">Code</div><pre><code>Right-click  &gt;  Summarize Values By  &gt;  Sum / Average</code></pre>
 <div class="lbl mt">Output</div><div class="out">Sum of salary          Average of salary
 HR         2,495,026       56,705.14
 Marketing  3,106,086       73,954.43
@@ -2800,7 +5147,7 @@ Tech         15        8    13         13      49</div>
 </article>
 <article class="e"><h3>Percentage of total</h3>
 <div class="what"><span class="lbl">In short</span><p>Drag the same field into Values twice, then set the second to show a percentage.</p></div>
-<div class="lbl mt">Code</div><pre><code>Right-click the second column  &amp;gt;  Show Values As  &amp;gt;  % of Grand Total</code></pre>
+<div class="lbl mt">Code</div><pre><code>Right-click the second column  &gt;  Show Values As  &gt;  % of Grand Total</code></pre>
 <div class="lbl mt">Output</div><div class="out">HR         45    22.50%
 Marketing  42    21.00%
 Sales      64    32.00%
@@ -2808,30 +5155,30 @@ Tech       49    24.50%</div>
 </article>
 <article class="e"><h3>Refresh</h3>
 <div class="what"><span class="lbl">In short</span><p>A pivot table is a snapshot. Change the data underneath and it does not update until you tell it to.</p></div>
-<div class="lbl mt">Code</div><pre><code>Right-click inside the pivot  &amp;gt;  Refresh
-Data  &amp;gt;  Refresh All          (every pivot in the workbook)</code></pre>
+<div class="lbl mt">Code</div><pre><code>Right-click inside the pivot  &gt;  Refresh
+Data  &gt;  Refresh All          (every pivot in the workbook)</code></pre>
 </article>
 <h2 class="cat" id="charts-and-the-summary">Charts and the summary</h2>
 <article class="e"><h3>A chart from a pivot table</h3>
 <div class="what"><span class="lbl">In short</span><p>Click inside the pivot and insert a chart. Excel takes the categories and values straight from it.</p></div>
-<div class="lbl mt">Code</div><pre><code>Click inside the pivot  &amp;gt;  Insert  &amp;gt;  Clustered Column</code></pre>
+<div class="lbl mt">Code</div><pre><code>Click inside the pivot  &gt;  Insert  &gt;  Clustered Column</code></pre>
 </article>
 <article class="e"><h3>Title, axes, legend</h3>
 <div class="what"><span class="lbl">In short</span><p>Turn titles on from the + button. One series needs no legend; more than one does.</p></div>
-<div class="lbl mt">Code</div><pre><code>click the chart  &amp;gt;  +  &amp;gt;  [x] Chart Title  [x] Axis Titles  [ ] Legend
+<div class="lbl mt">Code</div><pre><code>click the chart  &gt;  +  &gt;  [x] Chart Title  [x] Axis Titles  [ ] Legend
 
-one series   -&amp;gt;  no legend
-many series  -&amp;gt;  legend</code></pre>
+one series   -&gt;  no legend
+many series  -&gt;  legend</code></pre>
 </article>
 <article class="e"><h3>Number formatting</h3>
 <div class="what"><span class="lbl">In short</span><p>Changes how a number looks, never what it is. Every formula still sees the original value.</p></div>
-<div class="lbl mt">Code</div><pre><code>Home  &amp;gt;  Number  &amp;gt;  Comma Style
+<div class="lbl mt">Code</div><pre><code>Home  &gt;  Number  &gt;  Comma Style
 
 5200000   -&gt;   5,200,000</code></pre>
 </article>
 <article class="e"><h3>Data bars</h3>
 <div class="what"><span class="lbl">In short</span><p>A bar drawn inside the cell, so values can be compared without reading them. Keep the numbers visible beside it.</p></div>
-<div class="lbl mt">Code</div><pre><code>Home  &amp;gt;  Conditional Formatting  &amp;gt;  Data Bars</code></pre>
+<div class="lbl mt">Code</div><pre><code>Home  &gt;  Conditional Formatting  &gt;  Data Bars</code></pre>
 </article>
 <article class="e"><h3>What a summary sheet needs</h3>
 <div class="what"><span class="lbl">In short</span><p>A title, a date, how many rows it describes, at least one chart, and a sentence saying what the numbers mean.</p></div>
@@ -2851,7 +5198,7 @@ Median salary    68,841
 "One employee earns 52,00,000, which pulls the average up.
 Medians are shown alongside averages for this reason."</code></pre>
 </article></section>
-<footer>TAP Academy &mdash; Data Analytics &middot; 259 entries, all executed</footer>
+<footer>TAP Academy &mdash; Data Analytics &middot; 444 entries, all executed</footer>
 </div>
 <button class="tt" id="tt">Theme</button>
 <script>
